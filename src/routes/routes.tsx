@@ -5,6 +5,7 @@ import NotFound from "../pages/notfound/NotFound";
 import ProductsPage from "../pages/products/ProductsPage";
 import OrderPage from "../pages/orders/OrderPage";
 import AboutPage from "../pages/about/AboutPage";
+import Services from "../pages/services/Services";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: "/about",
         element: <AboutPage />,
+      },
+      {
+        path: "/services",
+        element: <Services />,
       },
     ],
   },

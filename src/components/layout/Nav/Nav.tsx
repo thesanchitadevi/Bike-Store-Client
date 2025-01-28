@@ -8,6 +8,7 @@ const navItems = [
   { id: 1, text: "Products", link: "/products" },
   { id: 2, text: "Orders", link: "/orders" },
   { id: 3, text: "About", link: "/about" },
+  { id: 4, text: "Services", link: "/services" },
 ];
 
 const Nav = () => {
