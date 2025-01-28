@@ -4,7 +4,7 @@ import Nav from "../Nav/Nav";
 
 const MainLayout = () => {
   return (
-    <div>
+    <div className="font-Roboto">
       <Nav />
       <Outlet />
       <Footer />

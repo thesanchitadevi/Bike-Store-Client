@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+@theme {
+  --font-Roboto: Roboto, sans-serif;
+  --font-Montserrat: Montserrat, sans-serif;
+}
+/* Base Color:(#1A73E8)
+
+Accent Color:  (#F4B400)
+
+Neutral Color:  (#F5F5F5) */

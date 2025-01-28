@@ -1,4 +1,6 @@
- <svg
+const Logo = () => {
+  return (
+    <svg
       xmlns="http://www.w3.org/2000/svg"
       width="100"
       height="100"
@@ -38,3 +40,7 @@
         fill="#1A73E8"
       />
     </svg>
+  );
+};
+
+export default Logo;
