@@ -34,13 +34,13 @@ const Nav = () => {
           {navItems.map((item) => (
             <li
               key={item.id}
-              className="p-4 rounded-xl cursor-pointer duration-300  hover:text-[#23449e]"
+              className="p-4 r font-semibold text-medium cursor-pointer duration-300 hover:text-[#BD2A2E]"
             >
               <NavLink to={item.link}>
                 {" "}
                 <span
-                  className={`cursor-pointer hover:text-primary-red transition-all duration-300 ${
-                    item.link === location.pathname ? "text-primary-red" : ""
+                  className={`cursor-pointer hover:text-[#BD2A2E] transition-all duration-300 ${
+                    item.link === location.pathname ? "text-[#BD2A2E]" : ""
                   }`}
                 >
                   {item.text}
@@ -56,29 +56,32 @@ const Nav = () => {
         <div onClick={handleNav} className="block md:hidden">
           {nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
         </div>
-
         {/* Mobile Navigation Menu */}
         <ul
           className={
             nav
-              ? "fixed md:hidden left-0 top-0 w-[60%] h-full  bg-background backdrop-filter backdrop-blur-md  border-slate-600 bg-opacity-80 shadow-lg  ease-in-out duration-500"
+              ? "fixed md:hidden left-0 top-0 w-[60%] h-full  bg-background backdrop-filter backdrop-blur-md  border-slate-600 bg-opacity-80 shadow-lg  ease-in-out duration-500 pt-15"
               : "ease-in-out w-[60%] duration-500 fixed top-0 bottom-0 left-[-100%]"
           }
         >
           {/* Mobile Logo */}
-          {/* <h1 className="w-full text-2xl font-bold p-4 ">JobSolutions.</h1> */}
+          <div className="w-full text-2xl font-bold px-4">
+            <NavLink to="/">
+              <Logo />
+            </NavLink>
+          </div>
 
           {/* Mobile Navigation Items */}
           {navItems.map((item) => (
             <li
               key={item.id}
-              className="object-none object-center  rounded-xl m-5  p-2 cursor-pointer duration-300 hover:text-[#516cb6]"
+              className="object-none object-center m-5 p-2 cursor-pointer duration-300 hover:text-[#BD2A2E] text-gray-200"
             >
               <NavLink to={item.link}>
                 {" "}
                 <span
-                  className={`cursor-pointer hover:text-primary-red transition-all duration-300 ${
-                    item.link === location.pathname ? "text-primary-red" : ""
+                  className={`cursor-pointer hover:text-[#BD2A2E] transition-all duration-300 ${
+                    item.link === location.pathname ? "text-[#BD2A2E]" : ""
                   }`}
                 >
                   {item.text}

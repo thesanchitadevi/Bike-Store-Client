@@ -2,10 +2,10 @@ import { services } from "./Service.data";
 
 export default function Services() {
   return (
-    <div className="container mx-auto pt-10">
+    <div className="container mx-auto py-10">
       {/* Header */}
       <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4 animate-fade-in">
+        <h1 className="text-4xl font-bold mb-4 animate-fade-in text-[#1F2024] uppercase">
           Our Services
         </h1>
         <p className="text-gray-600 text-lg max-w-2xl mx-auto">
@@ -20,7 +20,7 @@ export default function Services() {
         {services.map((service, index) => (
           <div
             key={index}
-            className="shadow-lg rounded-2xl overflow-hidden transform transition duration-300 hover:-translate-y-2"
+            className="shadow-lg rounded-2xl overflow-hidden transform transition duration-300 hover:-translate-y-1"
           >
             {/* Service Image */}
             <div className="relative">
