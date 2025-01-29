@@ -2,13 +2,17 @@ import { Minus, Plus, ShoppingCart } from "lucide-react";
 import { useParams } from "react-router-dom";
 import { useGetSingleproductQuery } from "../../redux/features/products/products.api";
 import { useState } from "react";
+import { useAppDispatch } from "../../redux/hooks";
+import { addToCart } from "../../redux/features/cart/cartSlice";
 
 const tags = ["Bike", "Mountain Bikes", "Road Bikes", "Hybrid Bikes"];
 
 const ProductsDetails = () => {
   const { id } = useParams();
-  const { data, isLoading, error } = useGetSingleproductQuery(id);
+  const { data, isLoading, error } = useGetSingleproductQuery(id as string);
   const [quantity, setQuantity] = useState(1);
+
+  const dispatch = useAppDispatch();
 
   // Increase quantity
   const handleIncrease = () => {
@@ -27,6 +31,19 @@ const ProductsDetails = () => {
     return <p className="text-center py-4">Product not found.</p>;
 
   const product = data.data;
+
+  const handleAddToCart = () => {
+    console.log("Adding to cart with quantity:", quantity); // Debugging
+    dispatch(
+      addToCart({
+        product: product._id, // Use the product's unique ID
+        name: product.name,
+        price: product.price,
+        quantity, // Pass the selected quantity
+        image: product.image,
+      })
+    );
+  };
 
   return (
     <div className="py-15">
@@ -106,6 +123,7 @@ const ProductsDetails = () => {
                 <button
                   className="flex justify-center gap-2 w-full bg-[#BD2A2E] text-white py-4 px-4 font-semibold hover:bg-gray-800 cursor-pointer uppercase"
                   type="button"
+                  onClick={handleAddToCart}
                 >
                   <ShoppingCart /> Add to Cart
                 </button>

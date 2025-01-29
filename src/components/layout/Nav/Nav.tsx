@@ -3,6 +3,8 @@ import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { NavLink, useLocation } from "react-router-dom";
 import Logo from "../../../assets/Logo";
 import { ShoppingCart, UserRound } from "lucide-react";
+import { useAppSelector } from "../../../redux/hooks";
+import { selectCartCount } from "../../../redux/features/cart/cartSlice";
 
 // Array containing navigation items
 const navItems = [
@@ -12,9 +14,12 @@ const navItems = [
   { id: 4, text: "Services", link: "/services" },
 ];
 
-const Nav = () => {
+const Nav = ({ openCartSidebar }) => {
+  //Cart
+  const cartCount = useAppSelector(selectCartCount);
+
   const location = useLocation();
-  console.log(location);
+
   // State to manage the navbar's visibility
   const [nav, setNav] = useState(false);
 
@@ -56,15 +61,18 @@ const Nav = () => {
 
         <div className="hidden md:flex-1 md:flex md:justify-end ">
           {/* Cart Button */}
-          <NavLink to="/cart" className="relative p-4">
+          <button
+            onClick={openCartSidebar}
+            className="relative p-4 cursor-pointer"
+          >
             <ShoppingCart />
             {
               // Cart Count
               <span className="absolute top-0 right-0 bg-red-600 text-white text-xs rounded-full px-2 py-1">
-                3
+                {cartCount}
               </span>
             }
-          </NavLink>
+          </button>
           <NavLink to="/login">
             <button className=" py-4 px-2  cursor-pointer ">
               <UserRound />
