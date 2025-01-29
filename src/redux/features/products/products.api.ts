@@ -1,4 +1,5 @@
 import { TQueryParam, TResponseRedux } from "../../../types/global.type";
+import { TProduct } from "../../../types/product.type";
 import { baseApi } from "../../api/baseApi";
 
 const ProductsApi = baseApi.injectEndpoints({
@@ -20,12 +21,19 @@ const ProductsApi = baseApi.injectEndpoints({
         };
       },
 
-      transformResponse: (response: TResponseRedux<any>) => {
+      transformResponse: (response: TResponseRedux<TProduct>) => {
         return {
           data: response.data,
           meta: response.meta,
         };
       },
+    }),
+
+    getSingleproduct: builder.query({
+      query: (id) => ({
+        url: `/products/${id}`,
+        method: "GET",
+      }),
     }),
 
     addProduct: builder.mutation({
@@ -38,4 +46,8 @@ const ProductsApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetAllFProductsQuery, useAddProductMutation } = ProductsApi;
+export const {
+  useGetAllFProductsQuery,
+  useGetSingleproductQuery,
+  useAddProductMutation,
+} = ProductsApi;

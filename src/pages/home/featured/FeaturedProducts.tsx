@@ -1,24 +1,32 @@
 import { Link } from "react-router-dom";
-import { useGetAllFProductsQuery } from "../../redux/features/products/products.api";
 import { Star } from "lucide-react";
+import { useGetAllFProductsQuery } from "../../../redux/features/products/products.api";
+import { TProduct } from "../../../types/product.type";
 
-const ProductsPage = () => {
+const FeaturedProductsPage = () => {
   const { data: products, isLoading } = useGetAllFProductsQuery(undefined);
 
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
+  console.log(products);
+
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 my-15">
       <div className="text-center">
         <h1 className="text-4xl font-bold mb-4 animate-fade-in uppercase">
-          Products
+          Featured Products
         </h1>
+        <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+          We offer top-notch solutions for all your biking needs. From repairs
+          and customizations to rentals, we have everything you need to keep you
+          riding smoothly
+        </p>
       </div>
       {/* Product Card */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
-        {products?.data?.map((product) => (
+        {products?.data?.slice(0, 6).map((product: TProduct) => (
           <>
             <div
               key={product._id}
@@ -72,7 +80,7 @@ const ProductsPage = () => {
                     )
                   }
                 </div>
-                <Link to={`/product/${product._id}`}>
+                <Link to={`/product/${product.id}`}>
                   <button className=" bg-transparent text-gray-600 hover:text-[#BD2A2E] font-bold py-4 px-4 rounded w-full mt-4 cursor-pointer">
                     View Details
                   </button>
@@ -82,8 +90,17 @@ const ProductsPage = () => {
           </>
         ))}
       </div>
+
+      {/* All Products Button */}
+      <div className="text-center mt-12">
+        <Link to="/products">
+          <button className="bg-[#BD2A2E] text-white py-4 px-8 font-semibold hover:bg-gray-800 cursor-pointer uppercase">
+            View All Products
+          </button>
+        </Link>
+      </div>
     </div>
   );
 };
 
-export default ProductsPage;
+export default FeaturedProductsPage;
