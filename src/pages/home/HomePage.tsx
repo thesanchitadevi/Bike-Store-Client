@@ -1,4 +1,6 @@
 import Services from "../services/Services";
+import Banner from "./banner";
+import BestProducts from "./bestproducts/BestProducts";
 import Brand from "./brand/Brand";
 import Catergory from "./Category/Catergory";
 import FeaturedProductsPage from "./featured/FeaturedProducts";
@@ -14,6 +16,8 @@ const HomePage = () => {
       <Brand />
       <Promotional />
       <FeaturedProductsPage />
+      <Banner />
+      <BestProducts />
     </>
   );
 };

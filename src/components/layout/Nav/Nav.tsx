@@ -2,11 +2,12 @@ import { useState } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { NavLink, useLocation } from "react-router-dom";
 import Logo from "../../../assets/Logo";
+import { ShoppingCart, UserRound } from "lucide-react";
 
 // Array containing navigation items
 const navItems = [
   { id: 1, text: "Products", link: "/products" },
-  { id: 2, text: "Orders", link: "/orders" },
+  { id: 2, text: "Contact", link: "/contact" },
   { id: 3, text: "About", link: "/about" },
   { id: 4, text: "Services", link: "/services" },
 ];
@@ -21,6 +22,9 @@ const Nav = () => {
   const handleNav = () => {
     setNav(!nav);
   };
+
+  /* Cart Count logic */
+
   return (
     <>
       <div className="flex justify-between items-center h-24 max-w-7xl mx-auto md:px-0  px-5">
@@ -50,7 +54,23 @@ const Nav = () => {
           ))}
         </ul>
 
-        <div className="hidden md:flex-1 md:flex md:justify-end "></div>
+        <div className="hidden md:flex-1 md:flex md:justify-end ">
+          {/* Cart Button */}
+          <NavLink to="/cart" className="relative p-4">
+            <ShoppingCart />
+            {
+              // Cart Count
+              <span className="absolute top-0 right-0 bg-red-600 text-white text-xs rounded-full px-2 py-1">
+                3
+              </span>
+            }
+          </NavLink>
+          <NavLink to="/login">
+            <button className=" py-4 px-2  cursor-pointer ">
+              <UserRound />
+            </button>
+          </NavLink>
+        </div>
 
         {/* Mobile Navigation Icon */}
         <div onClick={handleNav} className="block md:hidden">
