@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
-import { NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import Logo from "../../../assets/Logo";
 import { ShoppingCart, UserRound } from "lucide-react";
 import { useAppSelector } from "../../../redux/hooks";
@@ -59,7 +59,7 @@ const Nav = ({ openCartSidebar }) => {
           ))}
         </ul>
 
-        <div className="hidden md:flex-1 md:flex md:justify-end ">
+        <div className="md:flex-1 md:flex md:justify-end ">
           {/* Cart Button */}
           <button
             onClick={openCartSidebar}
@@ -74,14 +74,14 @@ const Nav = ({ openCartSidebar }) => {
             }
           </button>
           <NavLink to="/login">
-            <button className=" py-4 px-2  cursor-pointer ">
+            <button className="py-4 px-2 cursor-pointer ">
               <UserRound />
             </button>
           </NavLink>
         </div>
 
         {/* Mobile Navigation Icon */}
-        <div onClick={handleNav} className="block md:hidden">
+        <div onClick={handleNav} className="block md:hidden ml-2">
           {nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
         </div>
         {/* Mobile Navigation Menu */}
@@ -103,7 +103,7 @@ const Nav = ({ openCartSidebar }) => {
           {navItems.map((item) => (
             <li
               key={item.id}
-              className="object-none object-center m-5 p-2 cursor-pointer duration-300 hover:text-[#BD2A2E] text-gray-200"
+              className="object-none object-center m-5 p-2 cursor-pointer duration-300 hover:text-[#BD2A2E] text-gray-700"
             >
               <NavLink to={item.link}>
                 {" "}

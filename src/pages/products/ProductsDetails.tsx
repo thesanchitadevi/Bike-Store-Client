@@ -47,10 +47,10 @@ const ProductsDetails = () => {
 
   return (
     <div className="py-15">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto px-4 px-6 md:px-8">
         <div className="flex flex-col md:flex-row -mx-4">
           <div className="md:flex-1 px-4">
-            <div className="h-[460px] rounded-lg bg-gray-300 dark:bg-gray-700 mb-4">
+            <div className="md:h-[460px] rounded-lg bg-gray-300 mb-4">
               <img
                 src={product.image}
                 className="w-full h-full object-cover"
@@ -93,7 +93,7 @@ const ProductsDetails = () => {
                 {product.description}
               </p>
             </div>
-            <div className="flex -mx-2 my-15">
+            <div className="md:flex md:-mx-2 my-15 ">
               {/* Quantity Button */}
               <div>
                 <div className="flex items-center outline outline-gray-300">
@@ -106,7 +106,7 @@ const ProductsDetails = () => {
                   </button>
                   <input
                     type="number"
-                    className="outline-none text-center w-16 py-4 bg-transparent"
+                    className="outline-none text-center md:w-16 py-4 bg-transparent"
                     value={quantity}
                     readOnly
                   />
@@ -119,7 +119,7 @@ const ProductsDetails = () => {
                   </button>
                 </div>
               </div>
-              <div className="w-1/2 px-2">
+              <div className="md:w-1/2 md:px-2 mt-4 md:mt-0">
                 <button
                   className="flex justify-center gap-2 w-full bg-[#BD2A2E] text-white py-4 px-4 font-semibold hover:bg-gray-800 cursor-pointer uppercase"
                   type="button"
@@ -149,11 +149,9 @@ const ProductsDetails = () => {
                 </span>
               </div>
               {/* Tags */}
-              <div className="flex items-center mb-4">
-                <span className="font-bold text-gray-700 dark:text-gray-300 mr-2">
-                  Tags:{" "}
-                </span>
-                <span className="text-gray-600 dark:text-gray-300">
+              <div className="flex md:items-center mb-4">
+                <span className="font-bold text-gray-700  mr-2">Tags: </span>
+                <span className="text-gray-600">
                   {tags.map((tag, index) => (
                     <span key={index} className="mr-2">
                       {tag}

@@ -78,7 +78,7 @@ const CartSidebar = ({ isOpen, onClose }) => {
                       >
                         <Minus fontSize="small" />
                       </IconButton>
-                      <h2>{item.quantity}</h2>
+                      <h2 className="mt-1 text-lg">{item.quantity}</h2>
                       <IconButton
                         onClick={() => dispatch(increaseQuantity(item.product))}
                         size="small"
@@ -89,9 +89,12 @@ const CartSidebar = ({ isOpen, onClose }) => {
                     <div>
                       <h3>{item.price} BDT</h3>
                     </div>
-                    <h3 className="mt-4">
-                      Subtotal: {`${(item.price * item.quantity).toFixed(2)}`}{" "}
-                      BDT
+                    <h3>
+                      Subtotal:
+                      <span>
+                        {" "}
+                        {`${(item.price * item.quantity).toFixed(2)}`} BDT
+                      </span>
                     </h3>
                   </div>
                   <IconButton

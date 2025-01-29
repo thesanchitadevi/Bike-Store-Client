@@ -111,241 +111,245 @@ const ProductsPage = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4 animate-fade-in uppercase">
-          Products
-        </h1>
-      </div>
-      {/* Search Bar */}
-      <div className="mb-6 w-1/4">
-        <TextField
-          fullWidth
-          placeholder="Search by product name, brand, or category..."
-          value={searchInput}
-          onChange={handleSearchChange}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon />
-              </InputAdornment>
-            ),
-          }}
-          className="bg-white outline-none "
-        />
-      </div>
-
-      {/* Filters Section */}
-      <div className="mb-8 grid grid-cols-1 md:grid-cols-4 gap-4 bg-white p-4 rounded-lg shadow">
-        <FormControl fullWidth>
-          <InputLabel>Category</InputLabel>
-          <Select
-            value={filters.category}
-            label="Category"
-            onChange={(e) => handleFilterChange("category", e.target.value)}
-            className="bg-white"
-          >
-            <MenuItem value="">All Categories</MenuItem>
-            {categories.map((category) => (
-              <MenuItem key={category} value={category}>
-                {category}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-
-        <FormControl fullWidth>
-          <InputLabel>Brand</InputLabel>
-          <Select
-            value={filters.brand}
-            label="Brand"
-            onChange={(e) => handleFilterChange("brand", e.target.value)}
-            className="bg-white"
-          >
-            <MenuItem value="">All Brands</MenuItem>
-            {brands.map((brand) => (
-              <MenuItem key={brand} value={brand}>
-                {brand}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-
-        <div className="px-4">
-          <p className="text-sm font-medium mb-2">Price Range</p>
-          <Slider
-            value={[filters.minPrice, filters.maxPrice]}
-            onChange={handlePriceChange}
-            valueLabelDisplay="auto"
-            max={10000}
-            step={100}
+    <div className="bg-gray-100 py-12">
+      <div className="container mx-auto px-4 ">
+        <div className="text-center">
+          <h1 className="text-4xl font-bold mb-4 animate-fade-in uppercase">
+            Products
+          </h1>
+        </div>
+        {/* Search Bar */}
+        <div className="mb-6  w-full md:w-1/4 ">
+          <TextField
+            fullWidth
+            placeholder="Search by product name, brand, or category..."
+            value={searchInput}
+            onChange={handleSearchChange}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon />
+                </InputAdornment>
+              ),
+            }}
+            className="bg-white outline-none "
           />
-          <div className="mt-2 text-sm text-gray-500 flex justify-between">
-            <span>{filters.minPrice} BDT</span>
-            <span>{filters.maxPrice} BDT</span>
-          </div>
         </div>
 
-        <FormControl fullWidth>
-          <InputLabel>Availability</InputLabel>
-          <Select
-            value={filters.inStock}
-            label="Availability"
-            onChange={(e) => handleFilterChange("inStock", e.target.value)}
-            className="bg-white"
-          >
-            <MenuItem value="">All Items</MenuItem>
-            <MenuItem value="true">In Stock</MenuItem>
-            <MenuItem value="false">Out of Stock</MenuItem>
-          </Select>
-        </FormControl>
-      </div>
+        {/* Filters Section */}
+        <div className="mb-8 grid grid-cols-1 md:grid-cols-4 gap-4 bg-white p-4 rounded-lg shadow">
+          <FormControl fullWidth>
+            <InputLabel>Category</InputLabel>
+            <Select
+              value={filters.category}
+              label="Category"
+              onChange={(e) => handleFilterChange("category", e.target.value)}
+              className="bg-white"
+            >
+              <MenuItem value="">All Categories</MenuItem>
+              {categories.map((category) => (
+                <MenuItem key={category} value={category}>
+                  {category}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
 
-      {/* Active Filters */}
-      <div className="mb-4 flex flex-wrap gap-2">
-        {Object.entries(filters).map(([key, value]) => {
-          if (value && key !== "minPrice" && key !== "maxPrice") {
-            if (key === "search") {
-              return value.trim() ? (
+          <FormControl fullWidth>
+            <InputLabel>Brand</InputLabel>
+            <Select
+              value={filters.brand}
+              label="Brand"
+              onChange={(e) => handleFilterChange("brand", e.target.value)}
+              className="bg-white"
+            >
+              <MenuItem value="">All Brands</MenuItem>
+              {brands.map((brand) => (
+                <MenuItem key={brand} value={brand}>
+                  {brand}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+
+          <div className="px-4">
+            <p className="text-sm font-medium mb-2">Price Range</p>
+            <Slider
+              value={[filters.minPrice, filters.maxPrice]}
+              onChange={handlePriceChange}
+              valueLabelDisplay="auto"
+              max={10000}
+              step={100}
+            />
+            <div className="mt-2 text-sm text-gray-500 flex justify-between">
+              <span>{filters.minPrice} BDT</span>
+              <span>{filters.maxPrice} BDT</span>
+            </div>
+          </div>
+
+          <FormControl fullWidth>
+            <InputLabel>Availability</InputLabel>
+            <Select
+              value={filters.inStock}
+              label="Availability"
+              onChange={(e) => handleFilterChange("inStock", e.target.value)}
+              className="bg-white"
+            >
+              <MenuItem value="">All Items</MenuItem>
+              <MenuItem value="true">In Stock</MenuItem>
+              <MenuItem value="false">Out of Stock</MenuItem>
+            </Select>
+          </FormControl>
+        </div>
+
+        {/* Active Filters */}
+        <div className="mb-4 flex flex-wrap gap-2">
+          {Object.entries(filters).map(([key, value]) => {
+            if (value && key !== "minPrice" && key !== "maxPrice") {
+              if (key === "search") {
+                return value.trim() ? (
+                  <Chip
+                    key={key}
+                    label={`Search: ${value}`}
+                    onDelete={() => {
+                      setSearchInput("");
+                      handleFilterChange("search", "");
+                    }}
+                    className="bg-gray-100"
+                  />
+                ) : null;
+              }
+              let displayValue = value;
+              if (key === "inStock") {
+                displayValue = formatInStockStatus(value);
+              }
+              return (
                 <Chip
                   key={key}
-                  label={`Search: ${value}`}
-                  onDelete={() => {
-                    setSearchInput("");
-                    handleFilterChange("search", "");
-                  }}
+                  label={`${
+                    key === "inStock" ? "Availability" : key
+                  }: ${displayValue}`}
+                  onDelete={() => handleFilterChange(key, "")}
                   className="bg-gray-100"
                 />
-              ) : null;
+              );
             }
-            let displayValue = value;
-            if (key === "inStock") {
-              displayValue = formatInStockStatus(value);
-            }
-            return (
-              <Chip
-                key={key}
-                label={`${
-                  key === "inStock" ? "Availability" : key
-                }: ${displayValue}`}
-                onDelete={() => handleFilterChange(key, "")}
-                className="bg-gray-100"
-              />
-            );
-          }
-          return null;
-        })}
-        {(filters.minPrice > 0 || filters.maxPrice < 10000) && (
-          <Chip
-            label={`Price: ${filters.minPrice} - ${filters.maxPrice} BDT`}
-            className="bg-gray-100"
-          />
-        )}
-        {Object.values(filters).some((v) => v !== "") && (
-          <Button
-            variant="outlined"
-            size="small"
-            onClick={() =>
-              setFilters({
-                category: "",
-                brand: "",
-                minPrice: 0,
-                maxPrice: 10000,
-                inStock: "", // Reset to empty string
-                search: "", // Reset to empty string
-              })
-            }
-            className="ml-2"
-          >
-            Clear All
-          </Button>
-        )}
-      </div>
-
-      {/* Product Card */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
-        {filteredProducts?.data?.map((product) => (
-          <>
-            <div
-              key={product._id}
-              className="bg-white rounded-sm overflow-hidden shadow-lg ring-2 ring-gray-200 ring-opacity-20 transition-all duration-300 hover:shadow-xl"
+            return null;
+          })}
+          {(filters.minPrice > 0 || filters.maxPrice < 10000) && (
+            <Chip
+              label={`Price: ${filters.minPrice} - ${filters.maxPrice} BDT`}
+              className="bg-gray-100"
+            />
+          )}
+          {Object.values(filters).some((v) => v !== "") && (
+            <Button
+              variant="outlined"
+              size="small"
+              onClick={() =>
+                setFilters({
+                  category: "",
+                  brand: "",
+                  minPrice: 0,
+                  maxPrice: 10000,
+                  inStock: "", // Reset to empty string
+                  search: "", // Reset to empty string
+                })
+              }
+              className="ml-2"
             >
-              <div className="relative">
-                <img
-                  className="w-full h-64 object-cover object-center"
-                  src={product.image}
-                  alt="Product Image"
-                />
-                {
-                  // Sale Badge
-                  product.quantity < 5 && (
-                    <div className="absolute top-0 right-0 bg-red-500 text-white px-2 py-1 m-2 rounded-md text-sm font-medium">
-                      SALE
-                    </div>
-                  )
-                }
-                {/* New badge */}
-                {new Date(product.createdAt) >=
-                  new Date(new Date().setDate(new Date().getDate() - 3)) && (
-                  <div className="absolute top-0 left-0 bg-[#BD2A2E] text-gray-200 font-sm px-2.5 py-1 m-2 text-xs ">
-                    NEW
-                  </div>
-                )}
-              </div>
-              <div className="p-4">
-                <h3 className="text-lg font-medium mb-2">{product.name}</h3>
-                {/* Rating */}
-                <div className="my-3 flex items-center">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className={`h-5 w-5 ${
-                        i < Math.round(4) ? "text-yellow-400" : "text-gray-300"
-                      }`}
-                    />
-                  ))}
-                  <span className="ml-2 text-sm text-gray-500">
-                    ({4} reviews)
-                  </span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="font-semibold text-medium">
-                    {product.price} BDT
-                  </span>
+              Clear All
+            </Button>
+          )}
+        </div>
+
+        {/* Product Card */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
+          {filteredProducts?.data?.map((product) => (
+            <>
+              <div
+                key={product._id}
+                className="bg-white rounded-sm overflow-hidden shadow-lg ring-2 ring-gray-200 ring-opacity-20 transition-all duration-300 hover:shadow-xl"
+              >
+                <div className="relative">
+                  <img
+                    className="w-full h-64 object-cover object-center"
+                    src={product.image}
+                    alt="Product Image"
+                  />
                   {
-                    // Out of Stock Badge
-                    product.quantity === 0 ? (
-                      <span className="text-[#BD2A2E] px-2 py-1 text-sm font-semibold">
-                        OUT OF STOCK
-                      </span>
-                    ) : (
-                      <span className="text-green-800 px-2 py-1 rounded-md text-sm font-semibold">
-                        IN STOCK
-                      </span>
+                    // Sale Badge
+                    product.quantity < 5 && (
+                      <div className="absolute top-0 right-0 bg-red-500 text-white px-2 py-1 m-2 rounded-md text-sm font-medium">
+                        SALE
+                      </div>
                     )
                   }
+                  {/* New badge */}
+                  {new Date(product.createdAt) >=
+                    new Date(new Date().setDate(new Date().getDate() - 3)) && (
+                    <div className="absolute top-0 left-0 bg-[#BD2A2E] text-gray-200 font-sm px-2.5 py-1 m-2 text-xs ">
+                      NEW
+                    </div>
+                  )}
                 </div>
-                <Link to={`/product/${product._id}`}>
-                  <button className=" bg-transparent text-gray-600 hover:text-[#BD2A2E] font-bold py-4 px-4 rounded w-full mt-4 cursor-pointer">
-                    View Details
-                  </button>
-                </Link>
+                <div className="p-4">
+                  <h3 className="text-lg font-medium mb-2">{product.name}</h3>
+                  {/* Rating */}
+                  <div className="my-3 flex items-center">
+                    {[...Array(5)].map((_, i) => (
+                      <Star
+                        key={i}
+                        className={`h-5 w-5 ${
+                          i < Math.round(4)
+                            ? "text-yellow-400"
+                            : "text-gray-300"
+                        }`}
+                      />
+                    ))}
+                    <span className="ml-2 text-sm text-gray-500">
+                      ({4} reviews)
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="font-semibold text-medium">
+                      {product.price} BDT
+                    </span>
+                    {
+                      // Out of Stock Badge
+                      product.quantity === 0 ? (
+                        <span className="text-[#BD2A2E] px-2 py-1 text-sm font-semibold">
+                          OUT OF STOCK
+                        </span>
+                      ) : (
+                        <span className="text-green-800 px-2 py-1 rounded-md text-sm font-semibold">
+                          IN STOCK
+                        </span>
+                      )
+                    }
+                  </div>
+                  <Link to={`/product/${product._id}`}>
+                    <button className=" bg-transparent text-gray-600 hover:text-[#BD2A2E] font-bold py-4 px-4 rounded w-full mt-4 cursor-pointer">
+                      View Details
+                    </button>
+                  </Link>
+                </div>
               </div>
+            </>
+          ))}
+        </div>
+        {
+          // Show message if no products are found
+          filteredProducts?.data?.length === 0 && (
+            <div className="text-center mt-8 text-gray-500">
+              No products found with the selected filters.
             </div>
-          </>
-        ))}
-      </div>
-      {
-        // Show message if no products are found
-        filteredProducts?.data?.length === 0 && (
-          <div className="text-center mt-8 text-gray-500">
-            No products found with the selected filters.
-          </div>
-        )
-      }
+          )
+        }
 
-      {/* Best Product Suggestion */}
-      <BestProducts />
+        {/* Best Product Suggestion */}
+        <BestProducts />
+      </div>
     </div>
   );
 };
