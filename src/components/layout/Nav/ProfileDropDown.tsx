@@ -1,14 +1,9 @@
 import { useState } from "react";
-import {
-  logout,
-  selectCurrentUser,
-} from "../../../redux/features/auth/authSlice";
+import { logout } from "../../../redux/features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
+import { useAppDispatch } from "../../../redux/hooks";
 
 const ProfileDropDown = () => {
-  const user = useAppSelector(selectCurrentUser);
-
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -25,9 +20,6 @@ const ProfileDropDown = () => {
     <div>
       <div className="absolute right-10 top-16 bg-white w-48 shadow-md rounded-md z-10">
         <div className="p-4">
-          <p className="text-xs text-gray-600"> {user?.name}</p>
-          <p className="text-xs text-gray-600"> {user?.email}</p>
-
           <button
             onClick={() => navigate("/profile")} // Navigate to profile page
             className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"

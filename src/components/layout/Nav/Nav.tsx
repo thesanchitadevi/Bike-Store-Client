@@ -42,7 +42,7 @@ const Nav = ({ openCartSidebar }) => {
     if (!user) {
       navigate("/login"); // Redirect to login page if user is not logged in
     } else {
-      setShowProfileDropdown(!showProfileDropdown); // Toggle profile dropdown
+      setShowProfileDropdown((prev) => !prev); // Toggle profile dropdown
     }
   };
 

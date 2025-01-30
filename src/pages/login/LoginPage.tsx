@@ -11,6 +11,7 @@ const LoginPage = () => {
   const dispatch = useAppDispatch();
 
   const [login, { error }] = useLoginMutation();
+  console.log({ error });
   const {
     register,
     handleSubmit,
@@ -18,7 +19,7 @@ const LoginPage = () => {
   } = useForm<FieldValues>();
 
   const onSubmit = async (data: FieldValues) => {
-    console.log(data);
+    console.log("Form submitted with data:", data);
 
     const toastId = toast.loading("Logging in...");
     try {
@@ -57,7 +58,7 @@ const LoginPage = () => {
             Login to your account to continue
           </p>
         </div>
-        <form onSubmit={onSubmit} className="mt-3">
+        <form onSubmit={handleSubmit(onSubmit)} className="mt-3">
           <div className="m-3">
             <label
               htmlFor="email"

@@ -27,11 +27,12 @@ const CartPage = () => {
           </h3>
         </div>
       ) : (
-        <>
-          <div className="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
+        <div className="mx-auto max-w-5xl grid grid-cols-1 md:grid-cols-3 gap-6 px-4">
+          {/* Cart Items Column */}
+          <div className="col-span-2">
             {cartItems.map((item) => (
-              <div className="rounded-lg md:w-2/3" key={item.product}>
-                <div className="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
+              <div className="rounded-lg mb-6" key={item.product}>
+                <div className="justify-between rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
                   <img
                     src={item.image}
                     alt="product-image"
@@ -48,7 +49,7 @@ const CartPage = () => {
                     </div>
                     <div className="mt-4 flex justify-between sm:space-y-6 sm:mt-0 sm:block sm:space-x-6">
                       <div className="flex items-center border-gray-100">
-                        <div className="flex items-start  gap-2">
+                        <div className="flex items-start gap-2">
                           <IconButton
                             onClick={() =>
                               dispatch(decreaseQuantity(item.product))
@@ -69,7 +70,7 @@ const CartPage = () => {
                         </div>
                       </div>
                       <div className="mb-2 flex justify-between">
-                        <p className="text-gray-700">Subtotal:</p>{" "}
+                        <p className="text-gray-700">Subtotal:</p>
                         <p className="text-gray-700">
                           {`${(item.price * item.quantity).toFixed(2)}`} BDT
                         </p>
@@ -79,12 +80,15 @@ const CartPage = () => {
                 </div>
               </div>
             ))}
-            <div className="mt-6 h-full rounded-sm bg-white p-6 shadow-md md:mt-0 md:w-1/3">
+          </div>
+
+          {/* Total Bar Column */}
+          <div className="col-span-1">
+            <div className="rounded-lg bg-white p-6 shadow-md">
               <div className="flex justify-between">
                 <p className="text-lg font-bold">Total</p>
                 <div className="">
                   <p className="mb-1 text-lg font-bold">
-                    {" "}
                     {totalPrice.toFixed(2)} BDT
                   </p>
                 </div>
@@ -94,7 +98,7 @@ const CartPage = () => {
               </button>
             </div>
           </div>
-        </>
+        </div>
       )}
     </div>
   );

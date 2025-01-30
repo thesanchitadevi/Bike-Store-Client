@@ -1,9 +1,11 @@
 import { Minus, Plus, ShoppingCart } from "lucide-react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useGetSingleproductQuery } from "../../redux/features/products/products.api";
 import { useState } from "react";
-import { useAppDispatch } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { addToCart } from "../../redux/features/cart/cartSlice";
+import { selectCurrentUser } from "../../redux/features/auth/authSlice";
+import { toast } from "sonner";
 
 const tags = ["Bike", "Mountain Bikes", "Road Bikes", "Hybrid Bikes"];
 
@@ -13,6 +15,11 @@ const ProductsDetails = () => {
   const [quantity, setQuantity] = useState(1);
 
   const dispatch = useAppDispatch();
+
+  const navigate = useNavigate();
+
+  // Check if the user is logged in
+  const user = useAppSelector(selectCurrentUser);
 
   // Increase quantity
   const handleIncrease = () => {
@@ -33,6 +40,13 @@ const ProductsDetails = () => {
   const product = data.data;
 
   const handleAddToCart = () => {
+    if (!user) {
+      // If the user is not logged in, show a toast and redirect to the login page
+      toast.error("You need to log in to add products to your cart.");
+      navigate("/login");
+      return;
+    }
+
     console.log("Adding to cart with quantity:", quantity); // Debugging
     dispatch(
       addToCart({
