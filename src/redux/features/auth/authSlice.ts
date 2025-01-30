@@ -6,8 +6,8 @@ export type TUser = {
   name: string;
   email: string;
   role: string;
-  phone?: string; // Optional field
-  address?: string; // Optional field
+  phone: string; // Optional field
+  address: string; // Optional field
   iat: number; // issued at
   exp: number;
 };

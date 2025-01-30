@@ -3,6 +3,8 @@ import { useAppSelector } from "../../redux/hooks";
 
 const ProfilePage = () => {
   const user = useAppSelector(selectCurrentUser);
+  console.log(user);
+
   return (
     <div className="container w-1/2 mx-auto py-12">
       <div className="bg-white overflow-hidden shadow rounded-lg border">
