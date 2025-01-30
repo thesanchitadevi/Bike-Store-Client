@@ -119,7 +119,7 @@ const ProductsPage = () => {
           </h1>
         </div>
         {/* Search Bar */}
-        <div className="mb-6  w-full md:w-1/4 ">
+        <div className="mb-6  w-full ">
           <TextField
             fullWidth
             placeholder="Search by product name, brand, or category..."
@@ -137,7 +137,7 @@ const ProductsPage = () => {
         </div>
 
         {/* Filters Section */}
-        <div className="mb-8 grid grid-cols-1 md:grid-cols-4 gap-4 bg-white p-4 rounded-lg shadow">
+        <div className="mb-8 grid grid-cols-1 md:grid-cols-4 gap-4 bg-gray-100 p-4 rounded-lg shadow">
           <FormControl fullWidth>
             <InputLabel>Category</InputLabel>
             <Select
@@ -175,6 +175,7 @@ const ProductsPage = () => {
           <div className="px-4">
             <p className="text-sm font-medium mb-2">Price Range</p>
             <Slider
+              color="#fffff"
               value={[filters.minPrice, filters.maxPrice]}
               onChange={handlePriceChange}
               valueLabelDisplay="auto"
@@ -267,7 +268,8 @@ const ProductsPage = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
           {filteredProducts?.data?.map((product) => (
             <>
-              <div
+              <Link
+                to={`/product/${product._id}`}
                 key={product._id}
                 className="bg-white rounded-sm overflow-hidden shadow-lg ring-2 ring-gray-200 ring-opacity-20 transition-all duration-300 hover:shadow-xl"
               >
@@ -334,7 +336,7 @@ const ProductsPage = () => {
                     </button>
                   </Link>
                 </div>
-              </div>
+              </Link>
             </>
           ))}
         </div>

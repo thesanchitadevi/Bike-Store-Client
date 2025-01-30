@@ -2,7 +2,7 @@ import { services } from "./Service.data";
 
 export default function Services() {
   return (
-    <div className="bg-gray-100 py-12">
+    <div className="py-12">
       <div className="container mx-auto">
         {/* Header */}
         <div className="text-center">
