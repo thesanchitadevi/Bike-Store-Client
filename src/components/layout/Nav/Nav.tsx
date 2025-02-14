@@ -48,7 +48,7 @@ const Nav = ({ openCartSidebar }) => {
 
   return (
     <>
-      <div className="flex justify-between items-center h-24 max-w-7xl mx-auto md:px-0  px-5">
+      <div className="flex justify-between items-center h-24 max-w-7xl mx-auto md:px-0  px-5 font-Roboto">
         {/* Logo */}
         <NavLink to="/" className="w-full text-3xl font-bold flex-1">
           <Logo />

@@ -24,9 +24,10 @@ const FeaturedProductsPage = () => {
       </div>
       {/* Product Card */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
-        {products?.data?.slice(0, 6).map((product: TProduct) => (
+        {products?.data?.slice(0, 4).map((product: TProduct) => (
           <>
-            <div
+            <Link
+              to={`/product/${product._id}`}
               key={product._id}
               className="bg-white rounded-sm overflow-hidden shadow-lg ring-2 ring-gray-200 ring-opacity-20 transition-all duration-300 hover:shadow-xl"
             >
@@ -85,13 +86,13 @@ const FeaturedProductsPage = () => {
                     )
                   }
                 </div>
-                <Link to={`/product/${product._id}`}>
+                <div>
                   <button className=" bg-transparent text-gray-600 hover:text-[#BD2A2E] font-bold py-4 px-4 rounded w-full mt-4 cursor-pointer">
                     View Details
                   </button>
-                </Link>
+                </div>
               </div>
-            </div>
+            </Link>
           </>
         ))}
       </div>

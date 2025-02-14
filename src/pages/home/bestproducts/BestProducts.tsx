@@ -50,6 +50,16 @@ const BestProducts = () => {
                     NEW
                   </div>
                 )}
+
+                {/* Best Selling Badge */}
+                {
+                  // Best Selling Badge
+                  product.quantity < 100 && (
+                    <div className="absolute top-0 right-0 bg-[#f5f258] text-gray-900 px-2.5 py-1 m-2 rounded-md text-sm font-sm">
+                      BEST
+                    </div>
+                  )
+                }
               </div>
               <div className="p-4">
                 <h3 className="text-lg font-medium mb-2">{product.name}</h3>
