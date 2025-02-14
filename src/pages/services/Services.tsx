@@ -21,7 +21,7 @@ export default function Services() {
           {services.map((service, index) => (
             <div
               key={index}
-              className="shadow-lg rounded-2xl overflow-hidden transform transition duration-300 hover:-translate-y-1"
+              className="shadow-lg rounded-md overflow-hidden transform transition duration-300 hover:-translate-y-1"
             >
               {/* Service Image */}
               <div className="relative">

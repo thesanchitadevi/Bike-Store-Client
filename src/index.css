@@ -118,29 +118,6 @@ Neutral Color:  (#F5F5F5) */
   background-image: url(/src/assets/hero-bg/3.jpg);
   background-position: center;
 }
-.hero .swiper-buttons {
-  display: none;
-}
-.hero .main-slider-dot .swiper-pagination-bullet {
-  width: 15px;
-  height: 15px;
-  margin: 0 2.5px !important;
-  display: inline-block;
-  border-radius: 30px;
-  opacity: 1;
-  border: 1px solid #4b5966;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  -webkit-transition: all 0.3s ease 0s;
-  transition: all 0.3s ease 0s;
-  background-color: transparent;
-}
-.hero
-  .main-slider-dot
-  .swiper-pagination-bullet.swiper-pagination-bullet-active {
-  background-color: #4b5966;
-  width: 30px;
-}
 .hero .slider-animation > * {
   -webkit-animation-duration: 1s;
   animation-duration: 1s;

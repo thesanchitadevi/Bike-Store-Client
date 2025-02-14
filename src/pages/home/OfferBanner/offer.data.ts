@@ -1,4 +1,4 @@
-export const PromoData = [
+export const OfferData = [
   {
     title: "Adventure Awaits – Gear Up with Us!",
     description:

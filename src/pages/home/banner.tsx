@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const Banner = () => {
+const PromoBanner = () => {
   return (
     <div className="relative bg-gradient-to-r from-purple-600 to-blue-600 h-100 text-white overflow-hidden">
       <div className="absolute inset-0">
@@ -31,4 +31,4 @@ const Banner = () => {
   );
 };
 
-export default Banner;
+export default PromoBanner;

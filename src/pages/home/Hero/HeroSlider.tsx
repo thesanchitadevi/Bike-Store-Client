@@ -6,7 +6,7 @@ function HeroSlider() {
   return (
     <>
       <section className="section hero m-tb-4">
-        <div className="container max-w-6xl  mx-auto py-4">
+        <div className="container max-w-6xl mx-auto py-4">
           <div className="main-content">
             {/* <!-- Hero Slider Start --> */}
             <div className="slider-content">
