@@ -32,7 +32,7 @@ const RegisterPage = () => {
       console.log("User registered:", userInfo);
 
       dispatch(setUser(userInfo));
-      navigate("/"); // Redirect to home page after successful registration
+      navigate("/login"); // Redirect to home page after successful registration
     } catch (err) {
       console.error("Failed to register:", err);
     }

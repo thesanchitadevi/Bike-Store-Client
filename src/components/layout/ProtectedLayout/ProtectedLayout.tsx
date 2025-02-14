@@ -20,11 +20,14 @@ const ProtectedLayout = ({ children, role }: TProtectedLayout) => {
     user = decodeToken(token);
   }
 
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
 
   if (role && user?.role !== role) {
-    dispatch(logout());
-    return <Navigate to="/login" replace={true} />;
+    return (
+      <Navigate
+        to={user?.role === "admin" ? "/admin/dashboard" : "/user/dashboard"}
+      />
+    );
   }
 
   if (!token) {

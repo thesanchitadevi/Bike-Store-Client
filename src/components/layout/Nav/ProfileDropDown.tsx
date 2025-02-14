@@ -21,26 +21,20 @@ const ProfileDropDown = () => {
       <div className="absolute right-10 top-16 bg-white w-48 shadow-md rounded-md z-10">
         <div className="p-4">
           <button
-            onClick={() => navigate("/profile")} // Navigate to profile page
+            onClick={() => navigate("/user/dashboard")} // Navigate to profile page
             className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
           >
-            Profile
+            My Dashboard
           </button>
           <hr className="my-2" />
 
           <button
-            onClick={() => navigate("/orders")} // Navigate to orders page
+            onClick={handleLogout} // Navigate to orders page
             className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
           >
-            Orders
+            Lgout
           </button>
         </div>
-        <button
-          onClick={handleLogout}
-          className="w-full py-2 text-sm hover:bg-gray-800 bg-[#BD2A2E] text-white flex justify-center cursor-pointer"
-        >
-          Logout
-        </button>
       </div>
     </div>
   );

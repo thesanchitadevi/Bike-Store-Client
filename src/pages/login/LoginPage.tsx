@@ -31,7 +31,18 @@ const LoginPage = () => {
       const res = await login(userInfo).unwrap(); // unwrap() is a utility function that extracts the data from the response object
       const user = decodeToken(res.data.accessToken) as TUser;
 
-      dispatch(setUser({ user: user, token: res.data.accessToken }));
+      dispatch(
+        setUser({
+          user: {
+            ...user,
+            name: res.data.user.name,
+            email: res.data.user.email,
+          },
+
+          token: res.data.accessToken,
+        })
+      );
+      console.log("User logged in:", user);
       toast.success("Logged in successfully", {
         id: toastId,
         duration: 2000,

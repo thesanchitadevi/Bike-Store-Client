@@ -11,6 +11,9 @@ import CartPage from "../pages/cart/CartPage";
 import LoginPage from "../pages/login/LoginPage";
 import RegisterPage from "../pages/register/RegisterPage";
 import ProfilePage from "../pages/profile/ProfilePage";
+import ProtectedLayout from "../components/layout/ProtectedLayout/ProtectedLayout";
+import DashboardLayout from "../components/layout/DashboardLayout/DashboardLayout";
+import UserDashboard from "../pages/dashboard/user/userDashboard";
 
 const router = createBrowserRouter([
   {
@@ -50,15 +53,29 @@ const router = createBrowserRouter([
         path: "/services",
         element: <Services />,
       },
+    ],
+  },
+  {
+    path: "/user/dashboard",
+    element: (
+      <ProtectedLayout role="customer">
+        <DashboardLayout />
+      </ProtectedLayout>
+    ),
+    children: [
       {
-        path: "/login",
-        element: <LoginPage />,
-      },
-      {
-        path: "/register",
-        element: <RegisterPage />,
+        path: "/user/dashboard",
+        element: <UserDashboard />,
       },
     ],
+  },
+  {
+    path: "/login",
+    element: <LoginPage />,
+  },
+  {
+    path: "/register",
+    element: <RegisterPage />,
   },
 ]);
 
