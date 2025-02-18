@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../redux/hooks";
 import { decodeToken } from "../../utils/decodeToken";
 import { setUser, TUser } from "../../redux/features/auth/authSlice";
@@ -10,6 +10,7 @@ import Logo from "../../assets/Logo";
 const LoginPage = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const location = useLocation(); // Get the current location
 
   const [login, { error }] = useLoginMutation();
 
@@ -20,8 +21,6 @@ const LoginPage = () => {
   } = useForm<FieldValues>();
 
   const onSubmit = async (data: FieldValues) => {
-    console.log("Form submitted with data:", data);
-
     const toastId = toast.loading("Logging in...");
     try {
       const userInfo = {
@@ -30,28 +29,31 @@ const LoginPage = () => {
       };
 
       const res = await login(userInfo).unwrap(); // unwrap() is a utility function that extracts the data from the response object
-      console.log("Login response:", res);
 
       const user = decodeToken(res.data.accessToken) as TUser;
 
       dispatch(
         setUser({
           user: {
-            ...user,
-            name: res.data.user.name,
-            email: res.data.user.email,
+            userId: user.userId,
+            name: user.name,
+            role: user.role,
+            email: user.email,
           },
-
           token: res.data.accessToken,
         })
       );
-      console.log("User logged in:", user);
+
       toast.success("Logged in successfully", {
         id: toastId,
         duration: 2000,
       });
 
-      navigate("/"); // Redirect to home page
+      // Retrieve last visited path or go to home
+      const lastPath = sessionStorage.getItem("lastPath") || "/";
+      sessionStorage.removeItem("lastPath"); // Clear stored path after use
+
+      navigate(lastPath, { replace: true }); // Redirect to last path
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       toast.error("Something went wrong", {

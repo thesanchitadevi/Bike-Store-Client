@@ -7,7 +7,7 @@ const BestProducts = () => {
   const { data: products, isLoading } = useGetAllFProductsQuery(undefined);
 
   const bestSellingProducts = products?.data?.filter(
-    (product) => product.quantity < 100
+    (product) => product.quantity < 150
   );
 
   if (isLoading) {
@@ -47,24 +47,13 @@ const BestProducts = () => {
                     </div>
                   )
                 }
-                {/* New badge */}
-                {new Date(product.createdAt) >=
-                  new Date(new Date().setDate(new Date().getDate() - 3)) && (
-                  <div
-                    className="absolute top-4 left-4 z-10
-                      bg-green-600
-                     text-white px-4 py-2 rounded-full text-sm font-medium shadow-md uppercase"
-                  >
-                    NEW
-                  </div>
-                )}
 
                 {/* Best Selling Badge */}
                 {
                   // Best Selling Badge
-                  product.quantity < 100 && (
+                  product.quantity < 150 && (
                     <div
-                      className="absolute top-4 left-4 z-10
+                      className="absolute top-4 right-4 z-10
                       bg-yellow-500
                      text-white px-4 py-2 rounded-full text-sm font-medium shadow-md uppercase"
                     >

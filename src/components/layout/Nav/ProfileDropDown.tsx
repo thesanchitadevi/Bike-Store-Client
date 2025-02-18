@@ -2,6 +2,7 @@ import { useState } from "react";
 import { logout } from "../../../redux/features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../../redux/hooks";
+import { toast } from "sonner";
 
 const ProfileDropDown = () => {
   const dispatch = useAppDispatch();
@@ -12,6 +13,7 @@ const ProfileDropDown = () => {
 
   const handleLogout = () => {
     dispatch(logout()); // Dispatch logout action
+    toast.success("Logged out successfully!");
     setShowProfileDropdown(false); // Hide dropdown
     navigate("/"); // Redirect to home page
   };
@@ -32,7 +34,7 @@ const ProfileDropDown = () => {
             onClick={handleLogout} // Navigate to orders page
             className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
           >
-            Lgout
+            Logout
           </button>
         </div>
       </div>

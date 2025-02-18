@@ -11,12 +11,15 @@ import {
   FaSignOutAlt,
 } from "react-icons/fa";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
-import { RootState } from "../../../redux/store";
+
 import { logout } from "../../../redux/features/auth/authSlice";
 import { AiFillProduct } from "react-icons/ai";
+import { toast } from "sonner";
+import { RootState } from "../../../redux/store";
 
 const DashboardLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { user } = useAppSelector((state: RootState) => state.auth);
@@ -50,10 +53,21 @@ const DashboardLayout = () => {
     { name: "Profile", path: "/user/dashboard/myProfile", icon: <FaUser /> },
   ];
 
-  const handleLogout = () => {
-    dispatch(logout());
-    navigate("/login");
+  const handleLogout = async () => {
+    try {
+      setLoading(true);
+      await dispatch(logout());
+      toast.success("Logged out successfully!");
+      navigate("/login"); // Redirect after logout
+    } catch (err) {
+      toast.error("Failed to log out. Please try again.");
+      console.error("Failed to logout", err);
+    } finally {
+      setLoading(false);
+    }
   };
+
+  if (loading) return <p className="text-center py-4">Logging out...</p>;
 
   return (
     <div className="min-h-screen bg-gray-100">

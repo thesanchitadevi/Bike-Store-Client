@@ -17,12 +17,12 @@ import UserDashboard from "../pages/dashboard/user/userDashboard";
 import OrderResponse from "../pages/orders/OrderResponse";
 import UserOrders from "../pages/dashboard/user/userOrders";
 import ContactPage from "../pages/Contact/ContactPage";
+import ProtectedRoutes from "./ProtectedRoutes";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    errorElement: <NotFound />,
     children: [
       {
         path: "/",
@@ -42,11 +42,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/orders",
-        element: <OrderPage />,
+        element: (
+          <ProtectedRoutes>
+            <OrderPage />
+          </ProtectedRoutes>
+        ),
       },
       {
         path: "orders/verify",
-        element: <OrderResponse />,
+        element: (
+          <ProtectedRoutes>
+            <OrderResponse />
+          </ProtectedRoutes>
+        ),
       },
       {
         path: "/profile",
@@ -91,6 +99,10 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <RegisterPage />,
+  },
+  {
+    path: "*",
+    element: <NotFound />,
   },
 ]);
 
