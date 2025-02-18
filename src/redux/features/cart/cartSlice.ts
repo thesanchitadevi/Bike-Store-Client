@@ -2,6 +2,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../store";
 
+// Load cart data from localStorage
+const loadCartFromLocalStorage = () => {
+  const savedCart = localStorage.getItem("cart");
+  return savedCart ? JSON.parse(savedCart) : { items: [], count: 0 };
+};
+
+// Save cart data to localStorage
+const saveCartToLocalStorage = (cart) => {
+  localStorage.setItem("cart", JSON.stringify(cart));
+};
+
 type TCartItem = {
   product: string;
   name: string;
@@ -10,11 +21,11 @@ type TCartItem = {
   image: string; // Add image property
 };
 
-const initialState = {
-  items: [] as TCartItem[],
-  count: 0,
-};
-
+// const initialState = {
+//   items: [] as TCartItem[],
+//   count: 0,
+// };
+const initialState = loadCartFromLocalStorage(); // Load cart data from localStorage
 const cartSlice = createSlice({
   name: "cart",
   initialState,
@@ -33,6 +44,7 @@ const cartSlice = createSlice({
 
       // Update the total count of items in the cart
       state.count += item.quantity;
+      saveCartToLocalStorage(state); // Save cart data to localStorage
     },
     removeFromCart: (state, action) => {
       const itemId = action.payload;
@@ -50,6 +62,7 @@ const cartSlice = createSlice({
         // Update the total count of items in the cart
         state.count -= 1;
       }
+      saveCartToLocalStorage(state); // Persist cart state
     },
     increaseQuantity: (state, action) => {
       const itemId = action.payload;
@@ -58,7 +71,12 @@ const cartSlice = createSlice({
       if (existingItem) {
         existingItem.quantity += 1; // Increase quantity
         state.count += 1; // Update total count
+      } else {
+        state.items = state.items.filter((item) => item.product !== itemId);
+        state.count -= 1;
       }
+
+      saveCartToLocalStorage(state); // Persist cart state
     },
     decreaseQuantity: (state, action) => {
       const itemId = action.payload;
@@ -74,11 +92,13 @@ const cartSlice = createSlice({
           state.count -= 1; // Update total count
         }
       }
+      saveCartToLocalStorage(state);
     },
     clearCart: (state) => {
       // Clear the entire cart
       state.items = [];
       state.count = 0;
+      saveCartToLocalStorage(state);
     },
   },
 });
