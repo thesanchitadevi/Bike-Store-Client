@@ -7,6 +7,7 @@ import {
 } from "../../redux/features/cart/cartSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { Minus, Plus } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const CartPage = () => {
   const cartItems = useAppSelector(selectCartItems);
@@ -93,9 +94,11 @@ const CartPage = () => {
                   </p>
                 </div>
               </div>
-              <button className="bg-[#BD2A2E] text-white py-4 px-8 font-semibold hover:bg-gray-800 cursor-pointer uppercase w-full mt-4">
-                Check out
-              </button>
+              <Link to="/orders">
+                <button className="bg-[#BD2A2E] text-white py-4 px-8 font-semibold hover:bg-gray-800 cursor-pointer uppercase w-full mt-4">
+                  Check out
+                </button>
+              </Link>
             </div>
           </div>
         </div>

@@ -24,7 +24,7 @@ const CartSidebar = ({ isOpen, onClose }) => {
 
   const handleCheckout = () => {
     onClose(); // Close the sidebar
-    navigate("/checkout"); // Navigate to the checkout page
+    navigate("/orders"); // Navigate to the checkout page
   };
 
   const handleVisitCart = () => {
@@ -121,7 +121,7 @@ const CartSidebar = ({ isOpen, onClose }) => {
                 className="bg-[#BD2A2E] text-white py-4 px-8 font-semibold hover:bg-gray-800 cursor-pointer uppercase"
                 onClick={handleCheckout}
               >
-                Proceed to Checkout
+                Check out
               </button>
               <button
                 className="bg-[#BD2A2E] text-white py-4 px-8 font-semibold hover:bg-gray-800 cursor-pointer uppercase"

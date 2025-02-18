@@ -11,3 +11,16 @@ export type TProduct = {
   createdAt: string;
   updatedAt: string;
 };
+export type TProductDetails = {
+  name: string;
+  brand: string;
+  category: string;
+  price: number;
+  quantity: string;
+  inStock: string;
+  image: string;
+  model: string;
+  description: string;
+  createdAt: string;
+  updatedAt: string;
+};

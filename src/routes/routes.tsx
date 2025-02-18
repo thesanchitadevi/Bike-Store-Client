@@ -14,6 +14,8 @@ import ProfilePage from "../pages/profile/ProfilePage";
 import ProtectedLayout from "../components/layout/ProtectedLayout/ProtectedLayout";
 import DashboardLayout from "../components/layout/DashboardLayout/DashboardLayout";
 import UserDashboard from "../pages/dashboard/user/userDashboard";
+import OrderResponse from "../pages/orders/OrderResponse";
+import UserOrders from "../pages/dashboard/user/userOrders";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +44,10 @@ const router = createBrowserRouter([
         element: <OrderPage />,
       },
       {
+        path: "orders/verify",
+        element: <OrderResponse />,
+      },
+      {
         path: "/profile",
         element: <ProfilePage />,
       },
@@ -66,6 +72,10 @@ const router = createBrowserRouter([
       {
         path: "/user/dashboard",
         element: <UserDashboard />,
+      },
+      {
+        path: "/user/dashboard/myOrders",
+        element: <UserOrders />,
       },
     ],
   },
