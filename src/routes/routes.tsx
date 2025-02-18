@@ -18,6 +18,7 @@ import OrderResponse from "../pages/orders/OrderResponse";
 import UserOrders from "../pages/dashboard/user/userOrders";
 import ContactPage from "../pages/Contact/ContactPage";
 import ProtectedRoutes from "./ProtectedRoutes";
+import UserProfile from "../pages/dashboard/user/userProfile";
 
 const router = createBrowserRouter([
   {
@@ -89,6 +90,10 @@ const router = createBrowserRouter([
       {
         path: "/user/dashboard/myOrders",
         element: <UserOrders />,
+      },
+      {
+        path: "/user/dashboard/myProfile",
+        element: <UserProfile />,
       },
     ],
   },
