@@ -47,7 +47,6 @@ const ProductsDetails = () => {
       return;
     }
 
-    console.log("Adding to cart with quantity:", quantity); // Debugging
     dispatch(
       addToCart({
         product: product._id, // Use the product's unique ID

@@ -1,22 +1,19 @@
 import { useState } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
-import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import Logo from "../../../assets/Logo";
 import { ShoppingCart, UserRound } from "lucide-react";
-import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
+import { useAppSelector } from "../../../redux/hooks";
 import { selectCartCount } from "../../../redux/features/cart/cartSlice";
-import {
-  logout,
-  selectCurrentUser,
-} from "../../../redux/features/auth/authSlice";
+import { selectCurrentUser } from "../../../redux/features/auth/authSlice";
 import ProfileDropDown from "./ProfileDropDown";
 
 // Array containing navigation items
 const navItems = [
   { id: 1, text: "Products", link: "/products" },
-  { id: 2, text: "Contact", link: "/contact" },
-  { id: 3, text: "About", link: "/about" },
   { id: 4, text: "Services", link: "/services" },
+  { id: 3, text: "About", link: "/about" },
+  { id: 2, text: "Contact", link: "/contact" },
 ];
 
 const Nav = ({ openCartSidebar }) => {
@@ -25,7 +22,6 @@ const Nav = ({ openCartSidebar }) => {
   const user = useAppSelector(selectCurrentUser);
 
   const location = useLocation();
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   // State to manage the navbar's visibility

@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import { useMemo, useState } from "react";
 import BestProducts from "../home/bestproducts/BestProducts";
+import Loading from "../../components/ui/Loading";
 
 const ProductsPage = () => {
   const [filters, setFilters] = useState({
@@ -107,7 +108,11 @@ const ProductsPage = () => {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
   }
 
   return (

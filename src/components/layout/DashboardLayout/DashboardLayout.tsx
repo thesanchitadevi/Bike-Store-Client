@@ -13,6 +13,7 @@ import {
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { RootState } from "../../../redux/store";
 import { logout } from "../../../redux/features/auth/authSlice";
+import { AiFillProduct } from "react-icons/ai";
 
 const DashboardLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -21,14 +22,32 @@ const DashboardLayout = () => {
   const { user } = useAppSelector((state: RootState) => state.auth);
 
   const adminMenu = [
-    { name: "Products", path: "/admin/products", icon: <FaBox /> },
-    { name: "Orders", path: "/admin/orders", icon: <FaList /> },
-    { name: "Users", path: "/admin/users", icon: <FaUser /> },
+    {
+      name: "Dashboard",
+      path: "/admin/dashboard",
+      icon: <FaBox />,
+    },
+    {
+      name: "Products",
+      path: "/admin/dashboard/products",
+      icon: <AiFillProduct />,
+    },
+    { name: "Orders", path: "/admin/dashboard/orders", icon: <FaList /> },
+    { name: "Users", path: "/admin/dashboard/users", icon: <FaUser /> },
   ];
 
   const customerMenu = [
-    { name: "My Orders", path: "/orders", icon: <FaShoppingBag /> },
-    { name: "Profile", path: "/profile", icon: <FaUser /> },
+    {
+      name: "Dashboard",
+      path: "/user/dashboard",
+      icon: <FaBox />,
+    },
+    {
+      name: "My Orders",
+      path: "/user/dashboard/myOrders",
+      icon: <FaShoppingBag />,
+    },
+    { name: "Profile", path: "/user/dashboard/myProfile", icon: <FaUser /> },
   ];
 
   const handleLogout = () => {

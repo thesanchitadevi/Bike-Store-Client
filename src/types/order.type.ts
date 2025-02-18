@@ -7,4 +7,5 @@ export interface IOrderResponse {
   products: { quantity: number; product: TProductDetails }[];
   totalPrice: number;
   status: string;
+  createdAt?: string;
 }

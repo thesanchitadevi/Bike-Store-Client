@@ -4,9 +4,10 @@ import {
   selectCartItems,
   selectTotalPrice,
 } from "../../redux/features/cart/cartSlice";
-import { useCreateOrderMutation } from "../../redux/features/order/order.spi";
+import { useCreateOrderMutation } from "../../redux/features/order/order.api";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { toast } from "sonner";
+import Loading from "../../components/ui/Loading";
 
 const OrderPage = () => {
   const dispatch = useAppDispatch();
@@ -58,8 +59,16 @@ const OrderPage = () => {
     const result = await createOrder(orderData).unwrap();
 
     // Handle success (clear cart, show notification, etc.)
-    console.log("Order created successfully:", result);
+    // console.log("Order created successfully:", result);
   };
+
+  if (isLoading) {
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
+  }
 
   return (
     <div>

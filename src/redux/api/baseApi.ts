@@ -39,7 +39,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
 
   if (result?.error?.status === 401) {
     //* Send Refresh
-    console.log("Sending refresh token");
+    // console.log("Sending refresh token");
 
     const res = await fetch("http://localhost:5000/api/auth/refresh-token", {
       method: "POST",

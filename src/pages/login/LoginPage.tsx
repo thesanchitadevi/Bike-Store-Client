@@ -5,13 +5,14 @@ import { setUser, TUser } from "../../redux/features/auth/authSlice";
 import { toast } from "sonner";
 import { useLoginMutation } from "../../redux/features/auth/authApi";
 import { FieldValues, useForm } from "react-hook-form";
+import Logo from "../../assets/Logo";
 
 const LoginPage = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const [login, { error }] = useLoginMutation();
-  console.log({ error });
+
   const {
     register,
     handleSubmit,
@@ -29,6 +30,8 @@ const LoginPage = () => {
       };
 
       const res = await login(userInfo).unwrap(); // unwrap() is a utility function that extracts the data from the response object
+      console.log("Login response:", res);
+
       const user = decodeToken(res.data.accessToken) as TUser;
 
       dispatch(
@@ -49,6 +52,7 @@ const LoginPage = () => {
       });
 
       navigate("/"); // Redirect to home page
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       toast.error("Something went wrong", {
         id: toastId,
@@ -58,7 +62,12 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="relative flex flex-col justify-center py-12 bg-gray-100">
+    <div className="relative flex flex-col min-h-screen justify-center items-center py-12 bg-gray-100">
+      <div className="flex justify-center">
+        <Link to="/">
+          <Logo />
+        </Link>
+      </div>
       <div className="w-full py-8 m-auto rounded-sm shadow-xl md:max-w-sm">
         <div className="mb-8 text-center">
           <h1 className="my-3 text-2xl font-bold uppercase">Login</h1>
@@ -103,7 +112,10 @@ const LoginPage = () => {
           </div>
 
           <div className="m-3 pt-10">
-            <button className="flex justify-center gap-2 w-full bg-[#BD2A2E] text-white py-4 px-4 font-semibold hover:bg-gray-800 cursor-pointer uppercase">
+            <button
+              type="submit"
+              className="flex justify-center gap-2 w-full bg-[#BD2A2E] text-white py-4 px-4 font-semibold hover:bg-gray-800 cursor-pointer uppercase"
+            >
               Login
             </button>
           </div>

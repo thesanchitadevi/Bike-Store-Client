@@ -1,4 +1,4 @@
-import { useVerifyOrderQuery } from "../../redux/features/order/order.spi";
+import { useVerifyOrderQuery } from "../../redux/features/order/order.api";
 import { Link, useSearchParams } from "react-router-dom";
 import Skeleton from "../Skeleton/Skeleton";
 

@@ -16,6 +16,7 @@ import DashboardLayout from "../components/layout/DashboardLayout/DashboardLayou
 import UserDashboard from "../pages/dashboard/user/userDashboard";
 import OrderResponse from "../pages/orders/OrderResponse";
 import UserOrders from "../pages/dashboard/user/userOrders";
+import ContactPage from "../pages/Contact/ContactPage";
 
 const router = createBrowserRouter([
   {
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
       {
         path: "/services",
         element: <Services />,
+      },
+      {
+        path: "/contact",
+        element: <ContactPage />,
       },
     ],
   },
