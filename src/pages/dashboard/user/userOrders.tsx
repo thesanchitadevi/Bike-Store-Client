@@ -96,10 +96,10 @@ const UserOrders = () => {
                 </p>
                 <span
                   className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${getStatusBadgeStyle(
-                    order?.orderStatus
+                    order?.status
                   )}`}
                 >
-                  {order?.orderStatus}
+                  {order?.status}
                 </span>
               </div>
             </div>
@@ -157,7 +157,7 @@ const UserOrders = () => {
         ))}
       </div>
 
-      {meta.totalPages > 1 && (
+      {meta?.totalPages > 1 && (
         <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="text-sm text-gray-500">
             Showing page {currentPage} of {meta.totalPages}

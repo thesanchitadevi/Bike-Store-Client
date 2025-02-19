@@ -19,6 +19,7 @@ import UserOrders from "../pages/dashboard/user/userOrders";
 import ContactPage from "../pages/Contact/ContactPage";
 import ProtectedRoutes from "./ProtectedRoutes";
 import UserProfile from "../pages/dashboard/user/userProfile";
+import AdminDashboard from "../pages/dashboard/admin/adminDashboard";
 
 const router = createBrowserRouter([
   {
@@ -72,6 +73,20 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         element: <ContactPage />,
+      },
+    ],
+  },
+  {
+    path: "/admin/dashboard",
+    element: (
+      <ProtectedLayout role="admin">
+        <DashboardLayout />
+      </ProtectedLayout>
+    ),
+    children: [
+      {
+        path: "/admin/dashboard",
+        element: <AdminDashboard />,
       },
     ],
   },

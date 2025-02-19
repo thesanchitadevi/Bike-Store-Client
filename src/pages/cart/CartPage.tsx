@@ -96,7 +96,7 @@ const CartPage = () => {
               </div>
               <Link to="/orders">
                 <button className="bg-[#BD2A2E] text-white py-4 px-8 font-semibold hover:bg-gray-800 cursor-pointer uppercase w-full mt-4">
-                  Check out
+                  Buy Now
                 </button>
               </Link>
             </div>

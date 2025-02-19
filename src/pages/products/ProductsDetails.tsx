@@ -40,12 +40,12 @@ const ProductsDetails = () => {
   const product = data.data;
 
   const handleAddToCart = () => {
-    if (!user) {
-      // If the user is not logged in, show a toast and redirect to the login page
-      toast.error("You need to log in to add products to your cart.");
-      navigate("/login");
-      return;
-    }
+    // if (!user) {
+    //   // If the user is not logged in, show a toast and redirect to the login page
+    //   toast.error("You need to log in to add products to your cart.");
+    //   navigate("/login");
+    //   return;
+    // }
 
     dispatch(
       addToCart({

@@ -37,6 +37,7 @@ const DashboardLayout = () => {
     },
     { name: "Orders", path: "/admin/dashboard/orders", icon: <FaList /> },
     { name: "Users", path: "/admin/dashboard/users", icon: <FaUser /> },
+    { name: "Profile", path: "/user/dashboard/myProfile", icon: <FaUser /> },
   ];
 
   const customerMenu = [

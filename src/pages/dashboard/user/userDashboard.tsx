@@ -1,3 +1,4 @@
+import Loading from "../../../components/ui/Loading";
 import { useMyOrdersQuery } from "../../../redux/features/order/order.api";
 
 const UserDashboard = () => {
@@ -17,6 +18,13 @@ const UserDashboard = () => {
         return "bg-gray-100 text-gray-800";
     }
   };
+
+  if (isLoading)
+    return (
+      <>
+        <Loading />
+      </>
+    );
 
   return (
     <div className="min-h-screen ">
