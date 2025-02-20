@@ -12,5 +12,6 @@ export interface IOrderResponse {
   };
   totalPrice: number;
   status: string;
+  orderStatus: string;
   createdAt?: string;
 }

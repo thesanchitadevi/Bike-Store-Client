@@ -9,6 +9,8 @@ import {
   FaBox,
   FaList,
   FaSignOutAlt,
+  FaChevronDown,
+  FaChevronUp,
 } from "react-icons/fa";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 
@@ -23,6 +25,7 @@ const DashboardLayout = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { user } = useAppSelector((state: RootState) => state.auth);
+  const [openMenu, setOpenMenu] = useState<string | null>(null);
 
   const adminMenu = [
     {
@@ -32,12 +35,22 @@ const DashboardLayout = () => {
     },
     {
       name: "Products",
-      path: "/admin/dashboard/products",
       icon: <AiFillProduct />,
+      submenu: [
+        { name: "Add Product", path: "/admin/dashboard/products/add" },
+        { name: "All Products", path: "/admin/dashboard/products" },
+      ],
     },
-    { name: "Orders", path: "/admin/dashboard/orders", icon: <FaList /> },
+    {
+      name: "Orders",
+      icon: <FaList />,
+      submenu: [
+        { name: "Add Orders", path: "/admin/dashboard/orders/add" },
+        { name: "All Orders", path: "/admin/dashboard/orders" },
+      ],
+    },
     { name: "Users", path: "/admin/dashboard/users", icon: <FaUser /> },
-    { name: "Profile", path: "/user/dashboard/myProfile", icon: <FaUser /> },
+    { name: "Profile", path: "/admin/dashboard/myProfile", icon: <FaUser /> },
   ];
 
   const customerMenu = [
@@ -54,12 +67,16 @@ const DashboardLayout = () => {
     { name: "Profile", path: "/user/dashboard/myProfile", icon: <FaUser /> },
   ];
 
+  const toggleMenu = (menuName: string) => {
+    setOpenMenu(openMenu === menuName ? null : menuName);
+  };
+
   const handleLogout = async () => {
     try {
       setLoading(true);
       await dispatch(logout());
       toast.success("Logged out successfully!");
-      navigate("/login"); // Redirect after logout
+      navigate("/login");
     } catch (err) {
       toast.error("Failed to log out. Please try again.");
       console.error("Failed to logout", err);
@@ -101,16 +118,56 @@ const DashboardLayout = () => {
           <nav className="flex-1">
             <ul className="space-y-2">
               {(user?.role === "admin" ? adminMenu : customerMenu).map(
-                (item) => (
-                  <li key={item.path}>
-                    <Link
-                      to={item.path}
-                      className="flex items-center p-3 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors"
-                      onClick={() => setIsSidebarOpen(false)}
-                    >
-                      <span className="mr-3">{item.icon}</span>
-                      {item.name}
-                    </Link>
+                (item, index) => (
+                  <li key={index}>
+                    {item.path ? (
+                      <Link
+                        to={item.path}
+                        className="flex items-center p-3 rounded-lg hover:bg-gray-100 transition-colors"
+                      >
+                        {item.icon && <span className="mr-3">{item.icon}</span>}
+                        {item.name}
+                      </Link>
+                    ) : (
+                      <div className="space-y-1">
+                        <button
+                          onClick={() => toggleMenu(item.name)}
+                          className="w-full flex items-center justify-between p-3 rounded-lg hover:bg-gray-100 transition-colors"
+                        >
+                          <div className="flex items-center">
+                            {item.icon && (
+                              <span className="mr-3">{item.icon}</span>
+                            )}
+                            {item.name}
+                          </div>
+                          {openMenu === item.name ? (
+                            <FaChevronUp className="w-4 h-4" />
+                          ) : (
+                            <FaChevronDown className="w-4 h-4" />
+                          )}
+                        </button>
+                        {item.submenu && (
+                          <ul
+                            className={`pl-6 space-y-1 overflow-hidden transition-all duration-200 ease-in-out ${
+                              openMenu === item.name
+                                ? "max-h-40 opacity-100"
+                                : "max-h-0 opacity-0"
+                            }`}
+                          >
+                            {item.submenu.map((subitem, subindex) => (
+                              <li key={subindex}>
+                                <Link
+                                  to={subitem.path}
+                                  className="flex items-center p-3 rounded-lg hover:bg-gray-100 transition-colors text-sm"
+                                >
+                                  {subitem.name}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+                    )}
                   </li>
                 )
               )}

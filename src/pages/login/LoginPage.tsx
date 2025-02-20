@@ -53,7 +53,11 @@ const LoginPage = () => {
       const lastPath = sessionStorage.getItem("lastPath") || "/";
       sessionStorage.removeItem("lastPath"); // Clear stored path after use
 
-      navigate(lastPath, { replace: true }); // Redirect to last path
+      const redirectPath =
+        user.role === "admin" ? "/admin/dashboard" : lastPath;
+
+      navigate(redirectPath, { replace: true });
+
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       toast.error("Something went wrong", {
