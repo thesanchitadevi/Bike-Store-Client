@@ -1,10 +1,10 @@
 import { useGetAllUsersQuery } from "../../../redux/features/admin/admin.api";
 import { useAllOrdersQuery } from "../../../redux/features/order/order.api";
-import { useGetAllFProductsQuery } from "../../../redux/features/products/products.api";
+import { useGetAllProductsQuery } from "../../../redux/features/products/products.api";
 
 const AdminDashboard = () => {
   const { data: orders } = useAllOrdersQuery([]);
-  const { data: products } = useGetAllFProductsQuery([]);
+  const { data: products } = useGetAllProductsQuery([]);
   const { data: users } = useGetAllUsersQuery([]);
   console.log(orders?.data);
   console.log(products?.data);

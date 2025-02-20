@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import { useGetAllFProductsQuery } from "../../../redux/features/products/products.api";
 import { TProduct } from "../../../types/product.type";
 import { Star } from "lucide-react";
+import { useGetAllProductsQuery } from "../../../redux/features/products/products.api";
 
 const BestProducts = () => {
-  const { data: products, isLoading } = useGetAllFProductsQuery(undefined);
+  const { data: products, isLoading } = useGetAllProductsQuery(undefined);
 
   const bestSellingProducts = products?.data?.filter(
     (product) => product.quantity < 150

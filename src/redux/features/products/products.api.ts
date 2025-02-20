@@ -4,7 +4,7 @@ import { baseApi } from "../../api/baseApi";
 
 const ProductsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getAllFProducts: builder.query({
+    getAllProducts: builder.query({
       query: (args) => {
         const params = new URLSearchParams();
 
@@ -65,7 +65,7 @@ const ProductsApi = baseApi.injectEndpoints({
 });
 
 export const {
-  useGetAllFProductsQuery,
+  useGetAllProductsQuery,
   useGetSingleproductQuery,
   useAddProductMutation,
   useUpdateProductMutation,

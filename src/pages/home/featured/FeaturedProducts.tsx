@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { Star } from "lucide-react";
-import { useGetAllFProductsQuery } from "../../../redux/features/products/products.api";
 import { TProduct } from "../../../types/product.type";
+import { useGetAllProductsQuery } from "../../../redux/features/products/products.api";
 
 const FeaturedProductsPage = () => {
-  const { data: products, isLoading } = useGetAllFProductsQuery(undefined);
+  const { data: products, isLoading } = useGetAllProductsQuery(undefined);
 
   if (isLoading) {
     return <div>Loading...</div>;
