@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState } from "react";
 import {
   useDeleteProductMutation,
@@ -10,6 +11,7 @@ import { TProduct } from "../../../../types/product.type";
 import { Pencil, Trash2, X } from "lucide-react";
 import { useForm } from "react-hook-form";
 
+const BIKE_CATEGORIES = ["Mountain", "Road", "Hybrid", "Electric"] as const;
 const AdminDashboardAllProducts = () => {
   const [page, setPage] = useState(1);
   const limit = 10;
@@ -30,7 +32,7 @@ const AdminDashboardAllProducts = () => {
   const [deleteProduct] = useDeleteProductMutation();
 
   const products = response?.data || [];
-  const totalPages = response?.meta?.totalPages || 1;
+  const totalPages = response?.meta?.totalPage || 1;
 
   const handleConfirmDelete = async () => {
     if (!deletingProduct) return;
@@ -50,7 +52,6 @@ const AdminDashboardAllProducts = () => {
     }
   };
 
-  const BIKE_CATEGORIES = ["Mountain", "Road", "Hybrid", "Electric"] as const;
   // Reset form when editing product changes
   useEffect(() => {
     if (editingProduct) {
