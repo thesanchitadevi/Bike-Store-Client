@@ -76,9 +76,7 @@ const AdminDashboardOrderAdd = () => {
     <div className="max-w-6xl mx-auto p-4">
       {/* Order create by admin */}
 
-      <h1 className="text-3xl font-bold mb-8 text-gray-800">
-        Create New Order
-      </h1>
+      <h1 className="text-3xl font-bold mb-8 text-gray-800">Add New Order</h1>
 
       <div className="bg-white rounded-xl shadow-md p-6">
         {/* Product Search and Selection */}
@@ -182,7 +180,7 @@ const AdminDashboardOrderAdd = () => {
 
                     <div className="w-24 text-right">
                       <p className="font-medium text-blue-600">
-                        $
+                        ৳
                         {(
                           product.price * (quantities[product._id] || 1)
                         ).toFixed(2)}
@@ -209,7 +207,7 @@ const AdminDashboardOrderAdd = () => {
               <div className="flex justify-between items-center">
                 <div>
                   <p className="text-xl font-bold text-gray-800">
-                    Total: ${calculateTotal().toFixed(2)}
+                    Total: ৳{calculateTotal().toFixed(2)}
                   </p>
                 </div>
                 <button
