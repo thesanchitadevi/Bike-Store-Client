@@ -1,375 +1,226 @@
-import { useState } from "react";
-import { Loader2 } from "lucide-react";
+import { useRef, useState } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
+import { useAddProductMutation } from "../../../../redux/features/products/products.api";
 
-interface ProductFormData {
+interface FormValues {
   name: string;
+  description: string;
   brand: string;
   price: number;
-  category: "Mountain" | "Road" | "Hybrid" | "Electric";
-  description: string;
   quantity: number;
+  category: string;
   inStock: boolean;
-  image: string;
+  model: string;
 }
-
-interface FormErrors {
-  name?: string;
-  brand?: string;
-  price?: string;
-  category?: string;
-  description?: string;
-  quantity?: string;
-  image?: string;
-}
-
-const categories = ["Mountain", "Road", "Hybrid", "Electric"] as const;
 
 const AdminDashboardProductAdd = () => {
-  const [formData, setFormData] = useState<Omit<ProductFormData, "image">>({
-    name: "",
-    brand: "",
-    price: 0,
-    category: "Mountain",
-    description: "",
-    quantity: 0,
-    inStock: true,
-  });
-
-  const [image, setImage] = useState<File | null>(null);
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [errors, setErrors] = useState<FormErrors>({});
-
-  const validateForm = (): boolean => {
-    const newErrors: FormErrors = {};
-
-    if (!formData.name.trim()) newErrors.name = "Product name is required";
-    if (!formData.brand.trim()) newErrors.brand = "Brand name is required";
-    if (formData.price <= 0) newErrors.price = "Price must be greater than 0";
-    if (formData.quantity < 0)
-      newErrors.quantity = "Quantity cannot be negative";
-    if (!formData.description.trim()) {
-      newErrors.description = "Description is required";
-    } else if (formData.description.length < 20) {
-      newErrors.description = "Description must be at least 20 characters";
-    }
-    if (!image) newErrors.image = "Product image is required";
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleInputChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
-  ) => {
-    const { name, value, type } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: type === "number" ? Number(value) : value,
-    }));
-    if (errors[name as keyof FormErrors]) {
-      setErrors((prev) => ({ ...prev, [name]: undefined }));
-    }
-  };
-
-  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData((prev) => ({ ...prev, inStock: e.target.checked }));
-  };
+  const [imagePreview, setImagePreview] = useState<string>("");
+  const [addProduct] = useAddProductMutation();
+  const { register, handleSubmit, reset } = useForm<FormValues>();
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (!file) return;
-
-    if (!file.type.startsWith("image/")) {
-      setErrors((prev) => ({ ...prev, image: "Please upload an image file" }));
-      return;
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
     }
-
-    if (file.size > 5 * 1024 * 1024) {
-      setErrors((prev) => ({
-        ...prev,
-        image: "Image size should be less than 5MB",
-      }));
-      return;
-    }
-
-    setImage(file);
-    const reader = new FileReader();
-    reader.onloadend = () => setImagePreview(reader.result as string);
-    reader.readAsDataURL(file);
-    setErrors((prev) => ({ ...prev, image: undefined }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!validateForm())
-      return toast.error("Please fill all required fields correctly");
-
-    setLoading(true);
-    const formDataToSend = new FormData();
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    const toastId = toast.loading("Adding Product...");
+    const formData = new FormData();
 
     try {
-      // Append form data
-      Object.entries(formData).forEach(([key, value]) => {
-        formDataToSend.append(key, value.toString());
-      });
+      const imageFile = fileInputRef.current?.files?.[0];
 
-      if (image) formDataToSend.append("image", image);
-
-      const response = await fetch("/api/admin/products", {
-        method: "POST",
-        body: formDataToSend,
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Failed to add product");
+      if (!imageFile) {
+        toast.error("Please select an image first!", { id: toastId });
+        return;
       }
 
-      toast.success("Product added successfully!");
+      // Create a data object with all form values
+      const productData = {
+        name: data.name,
+        description: data.description,
+        brand: data.brand,
+        price: data.price,
+        quantity: data.quantity,
+        category: data.category,
+        inStock: data.inStock,
+        model: data.model,
+      };
 
-      // Reset form
-      setFormData({
-        name: "",
-        brand: "",
-        price: 0,
-        category: "Mountain",
-        description: "",
-        quantity: 0,
-        inStock: true,
-      });
-      setImage(null);
-      setImagePreview(null);
+      // Append the file and stringified data
+      formData.append("file", imageFile);
+      formData.append("data", JSON.stringify(productData)); // Match backend expectation
+
+      await addProduct(formData).unwrap();
+
+      toast.success("Product added successfully!", { id: toastId });
+      reset();
+      setImagePreview("");
+      if (fileInputRef.current) fileInputRef.current.value = "";
     } catch (error) {
-      console.error("Error:", error);
-      toast.error(
-        error instanceof Error ? error.message : "Failed to add product"
-      );
-    } finally {
-      setLoading(false);
+      toast.error("Failed to add product. Please try again.", { id: toastId });
     }
   };
 
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-6">Add New Product</h2>
+      <h1 className="text-2xl font-bold mb-6">Add New Product</h1>
 
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="space-y-4">
-          {/* Name Input */}
-          <div>
-            <label
-              htmlFor="name"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Product Name
-            </label>
-            <input
-              id="name"
-              name="name"
-              type="text"
-              value={formData.name}
-              onChange={handleInputChange}
-              className={`mt-1 block w-full rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 ${
-                errors.name ? "border-red-300" : "border-gray-300"
-              }`}
-              required
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        {/* Image Upload */}
+        <div>
+          <label className="block text-sm font-medium mb-2">
+            Product Image <span className="text-red-500">*</span>
+          </label>
+          <input
+            ref={fileInputRef}
+            id="image"
+            name="image"
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
+            required
+            title="Product image is required"
+            className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-gray-100 file:text-gray-700 hover:file:bg-gray-200"
+          />
+          {imagePreview && (
+            <img
+              src={imagePreview}
+              alt="Preview"
+              className="mt-2 h-32 w-32 object-cover rounded"
             />
-            {errors.name && (
-              <p className="mt-1 text-sm text-red-600">{errors.name}</p>
-            )}
-          </div>
+          )}
+        </div>
 
-          {/* Brand Input */}
+        {/* Name */}
+        <div>
+          <label className="block text-sm font-medium mb-2">
+            Bike Name <span className="text-red-500">*</span>
+          </label>
+          <input
+            {...register("name")}
+            required
+            title="Name is required"
+            className="w-full px-3 py-2 border border-gray-300 rounded"
+          />
+        </div>
+
+        {/* Model */}
+        <div>
+          <label className="block text-sm font-medium mb-2">
+            Model <span className="text-red-500">*</span>
+          </label>
+          <input
+            {...register("model")}
+            required
+            title="Model is required"
+            className="w-full px-3 py-2 border border-gray-300 rounded"
+          />
+        </div>
+
+        {/* Description */}
+        <div>
+          <label className="block text-sm font-medium mb-2">
+            Description <span className="text-red-500">*</span>
+          </label>
+          <textarea
+            {...register("description")}
+            required
+            title="Description is required"
+            className="w-full px-3 py-2 border border-gray-300 rounded"
+            rows={3}
+          />
+        </div>
+
+        {/* Category */}
+        <div>
+          <label className="block text-sm font-medium mb-2">
+            Category <span className="text-red-500">*</span>
+          </label>
+          <select
+            {...register("category")}
+            required
+            title="Category is required"
+            className="w-full px-3 py-2 border border-gray-300 rounded"
+          >
+            <option value="">Select a category</option>
+            <option value="Mountain">Mountain</option>
+            <option value="Road">Road</option>
+            <option value="Hybrid">Hybrid</option>
+            <option value="Electric">Electric</option>
+          </select>
+        </div>
+
+        {/* Brand */}
+        <div>
+          <label className="block text-sm font-medium mb-2">
+            Brand <span className="text-red-500">*</span>
+          </label>
+          <input
+            {...register("brand")}
+            required
+            title="Brand is required"
+            className="w-full px-3 py-2 border border-gray-300 rounded"
+          />
+        </div>
+
+        {/* Price and Quantity */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label
-              htmlFor="brand"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Brand
+            <label className="block text-sm font-medium mb-2">
+              Price (৳) <span className="text-red-500">*</span>
             </label>
             <input
-              id="brand"
-              name="brand"
-              type="text"
-              value={formData.brand}
-              onChange={handleInputChange}
-              className={`mt-1 block w-full rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 ${
-                errors.brand ? "border-red-300" : "border-gray-300"
-              }`}
-              required
-            />
-            {errors.brand && (
-              <p className="mt-1 text-sm text-red-600">{errors.brand}</p>
-            )}
-          </div>
-
-          {/* Price Input */}
-          <div>
-            <label
-              htmlFor="price"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Price
-            </label>
-            <input
-              id="price"
-              name="price"
               type="number"
-              min="0"
-              step="1"
-              value={formData.price}
-              onChange={handleInputChange}
-              className={`mt-1 block w-full rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 ${
-                errors.price ? "border-red-300" : "border-gray-300"
-              }`}
+              {...register("price", { valueAsNumber: true })}
               required
+              min="1"
+              title="Price must be greater than 0"
+              className="w-full px-3 py-2 border border-gray-300 rounded"
             />
-            {errors.price && (
-              <p className="mt-1 text-sm text-red-600">{errors.price}</p>
-            )}
           </div>
 
-          {/* Category Select */}
           <div>
-            <label
-              htmlFor="category"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Category
-            </label>
-            <select
-              id="category"
-              name="category"
-              value={formData.category}
-              onChange={handleInputChange}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500"
-              required
-            >
-              {categories.map((category) => (
-                <option key={category} value={category}>
-                  {category}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {/* Description Textarea */}
-          <div>
-            <label
-              htmlFor="description"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Description
-            </label>
-            <textarea
-              id="description"
-              name="description"
-              value={formData.description}
-              onChange={handleInputChange}
-              rows={4}
-              className={`mt-1 block w-full rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 ${
-                errors.description ? "border-red-300" : "border-gray-300"
-              }`}
-              required
-            />
-            {errors.description && (
-              <p className="mt-1 text-sm text-red-600">{errors.description}</p>
-            )}
-          </div>
-
-          {/* Quantity Input */}
-          <div>
-            <label
-              htmlFor="quantity"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Quantity
+            <label className="block text-sm font-medium mb-2">
+              Quantity <span className="text-red-500">*</span>
             </label>
             <input
-              id="quantity"
-              name="quantity"
               type="number"
-              min="0"
-              value={formData.quantity}
-              onChange={handleInputChange}
-              className={`mt-1 block w-full rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 ${
-                errors.quantity ? "border-red-300" : "border-gray-300"
-              }`}
+              {...register("quantity", { valueAsNumber: true })}
               required
+              min="1"
+              title="Quantity must be greater than 0"
+              className="w-full px-3 py-2 border border-gray-300 rounded"
             />
-            {errors.quantity && (
-              <p className="mt-1 text-sm text-red-600">{errors.quantity}</p>
-            )}
           </div>
+        </div>
 
-          {/* In Stock Checkbox */}
-          <div className="flex items-center">
-            <input
-              id="inStock"
-              name="inStock"
-              type="checkbox"
-              checked={formData.inStock}
-              onChange={handleCheckboxChange}
-              className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-            />
-            <label
-              htmlFor="inStock"
-              className="ml-2 block text-sm text-gray-700"
-            >
-              In Stock
-            </label>
-          </div>
-
-          {/* Image Upload */}
-          <div>
-            <label
-              htmlFor="image"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Product Image
-            </label>
-            <input
-              id="image"
-              name="image"
-              type="file"
-              accept="image/*"
-              onChange={handleImageChange}
-              className={`mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 ${
-                errors.image ? "border-red-300" : ""
-              }`}
-            />
-            {errors.image && (
-              <p className="mt-1 text-sm text-red-600">{errors.image}</p>
-            )}
-            {imagePreview && (
-              <div className="mt-4">
-                <img
-                  src={imagePreview}
-                  alt="Product preview"
-                  className="max-w-xs rounded-lg shadow-md"
-                />
-              </div>
-            )}
-          </div>
+        {/* In Stock */}
+        <div className="flex items-center space-x-2">
+          <input
+            type="checkbox"
+            id="inStock"
+            {...register("inStock")}
+            className="h-4 w-4 text-blue-600 border-gray-300 rounded"
+          />
+          <label htmlFor="inStock" className="text-sm font-medium">
+            In Stock
+          </label>
         </div>
 
         <button
           type="submit"
-          disabled={loading}
-          className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+          className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 mt-6"
         >
-          {loading ? (
-            <>
-              <Loader2 className="animate-spin -ml-1 mr-2 h-5 w-5" />
-              Adding Product...
-            </>
-          ) : (
-            "Add Product"
-          )}
+          Add Product
         </button>
       </form>
     </div>

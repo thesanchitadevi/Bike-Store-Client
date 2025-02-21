@@ -21,8 +21,6 @@ import ProtectedRoutes from "./ProtectedRoutes";
 import UserProfile from "../pages/dashboard/user/userProfile";
 import AdminDashboard from "../pages/dashboard/admin/adminDashboard";
 import AdminProfile from "../pages/dashboard/admin/adminProfile";
-import AdminDashboardProducts from "../pages/dashboard/admin/products/addProduct";
-import AdminDashboardOrders from "../pages/dashboard/admin/orders/addOrders";
 import AdminDashboardUsers from "../pages/dashboard/admin/users/users";
 import AdminDashboardAllProducts from "../pages/dashboard/admin/products/allProducts";
 import AdminDashboardProductAdd from "../pages/dashboard/admin/products/addProduct";
