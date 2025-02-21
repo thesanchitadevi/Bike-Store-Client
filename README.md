@@ -30,22 +30,22 @@ A modern e-commerce frontend application for a bike store built with React, Redu
    ```
 
 ## Project Structure
-
+```
 src/
-├── assets/ # Static assets (images, fonts)
-├── components/ # Reusable components
-│ ├── layout/ # App layout components (Nav, Footer etc)
-│ └── ui/ # UI components (buttons, cards)
-├── pages/ # Route-based page components
+├── assets/      # Static assets (images, fonts)
+├── components/  # Reusable components
+│ ├── layout/    # App layout components (Nav, Footer etc)
+│ └── ui/        # UI components (buttons, cards)
+├── pages/       # Route-based page components
 ├── redux/
-│ ├── api/ # API service definitions
-│ ├── features/ # Redux feature slices
-│ ├── hooks # Custom Redux hooks
-│ └── store # Redux store configuration
-├── routes/ # Application routing configuration
-├── types/ # TypeScript type declarations
-├── utils/ # Utility functions/helpers
-
+│ ├── api/       # API service definitions
+│ ├── features/  # Redux feature slices
+│ ├── hooks      # Custom Redux hooks
+│ └── store      # Redux store configuration
+├── routes/      # Application routing configuration
+├── types/       # TypeScript type declarations
+├── utils/       # Utility functions/helpers
+```
 ### Available Scripts
 
 `npm run dev`: Start development server
