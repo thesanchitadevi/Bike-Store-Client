@@ -1,7 +1,12 @@
 import { AboutData } from "./About.data";
 import Address from "./Address";
 
-const Card = ({ title, description }) => {
+interface CardProps {
+  title: string;
+  description: string;
+}
+
+const Card = ({ title, description }: CardProps) => {
   return (
     <div className="shadow-md rounded-lg p-6">
       <div className="text-center">

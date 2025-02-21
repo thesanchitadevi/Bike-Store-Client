@@ -16,7 +16,11 @@ const navItems = [
   { id: 2, text: "Contact", link: "/contact" },
 ];
 
-const Nav = ({ openCartSidebar }) => {
+interface NavProps {
+  openCartSidebar: () => void;
+}
+
+const Nav = ({ openCartSidebar }: NavProps) => {
   // Cart Count Selector
   const cartCount = useAppSelector(selectCartCount);
   const user = useAppSelector(selectCurrentUser);

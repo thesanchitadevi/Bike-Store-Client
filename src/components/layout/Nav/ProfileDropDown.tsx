@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from "react";
 import { logout } from "../../../redux/features/auth/authSlice";
 import { useNavigate } from "react-router-dom";

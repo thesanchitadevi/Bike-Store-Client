@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // src/redux/cartSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../store";
@@ -9,17 +10,17 @@ const loadCartFromLocalStorage = () => {
 };
 
 // Save cart data to localStorage
-const saveCartToLocalStorage = (cart) => {
+const saveCartToLocalStorage = (cart: any) => {
   localStorage.setItem("cart", JSON.stringify(cart));
 };
 
-type TCartItem = {
-  product: string;
-  name: string;
-  price: number;
-  quantity: number;
-  image: string; // Add image property
-};
+// type TCartItem = {
+//   product: string;
+//   name: string;
+//   price: number;
+//   quantity: number;
+//   image: string; // Add image property
+// };
 
 // const initialState = {
 //   items: [] as TCartItem[],
@@ -32,7 +33,9 @@ const cartSlice = createSlice({
   reducers: {
     addToCart: (state, action) => {
       const item = action.payload;
-      const existingItem = state.items.find((i) => i.product === item.product); // Check if product exists
+      const existingItem = state.items.find(
+        (i: any) => i.product === item.product
+      ); // Check if product exists
 
       if (existingItem) {
         // If the product exists, update its quantity
@@ -48,7 +51,7 @@ const cartSlice = createSlice({
     },
     removeFromCart: (state, action) => {
       const itemId = action.payload;
-      const existingItem = state.items.find((i) => i.product === itemId);
+      const existingItem = state.items.find((i: any) => i.product === itemId);
 
       if (existingItem) {
         if (existingItem.quantity > 1) {
@@ -56,7 +59,9 @@ const cartSlice = createSlice({
           existingItem.quantity -= 1;
         } else {
           // If the item quantity is 1, remove it from the cart
-          state.items = state.items.filter((item) => item.product !== itemId);
+          state.items = state.items.filter(
+            (item: any) => item.product !== itemId
+          );
         }
 
         // Update the total count of items in the cart
@@ -66,13 +71,15 @@ const cartSlice = createSlice({
     },
     increaseQuantity: (state, action) => {
       const itemId = action.payload;
-      const existingItem = state.items.find((i) => i.product === itemId);
+      const existingItem = state.items.find((i: any) => i.product === itemId);
 
       if (existingItem) {
         existingItem.quantity += 1; // Increase quantity
         state.count += 1; // Update total count
       } else {
-        state.items = state.items.filter((item) => item.product !== itemId);
+        state.items = state.items.filter(
+          (item: any) => item.product !== itemId
+        );
         state.count -= 1;
       }
 
@@ -80,7 +87,7 @@ const cartSlice = createSlice({
     },
     decreaseQuantity: (state, action) => {
       const itemId = action.payload;
-      const existingItem = state.items.find((i) => i.product === itemId);
+      const existingItem = state.items.find((i: any) => i.product === itemId);
 
       if (existingItem) {
         if (existingItem.quantity > 1) {
@@ -88,7 +95,9 @@ const cartSlice = createSlice({
           state.count -= 1; // Update total count
         } else {
           // If quantity is 1, remove the item
-          state.items = state.items.filter((item) => item.product !== itemId);
+          state.items = state.items.filter(
+            (item: any) => item.product !== itemId
+          );
           state.count -= 1; // Update total count
         }
       }
@@ -117,12 +126,15 @@ export const selectCartCount = (state: RootState) => state.cart.count;
 
 // Calculate subtotal for each item
 export const selectSubtotal = (state: RootState) =>
-  state.cart.items.map((item) => item.price * item.quantity);
+  state.cart.items.map(
+    (item: { price: number; quantity: number }) => item.price * item.quantity
+  );
 
 // Calculate total price for the entire cart
 export const selectTotalPrice = (state: RootState) =>
   state.cart.items.reduce(
-    (total, item) => total + item.price * item.quantity,
+    (total: number, item: { price: number; quantity: number }) =>
+      total + item.price * item.quantity,
     0
   );
 

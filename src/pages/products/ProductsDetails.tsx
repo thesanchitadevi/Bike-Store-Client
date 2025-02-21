@@ -1,11 +1,9 @@
 import { Minus, Plus, ShoppingCart } from "lucide-react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useGetSingleproductQuery } from "../../redux/features/products/products.api";
 import { useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { useAppDispatch } from "../../redux/hooks";
 import { addToCart } from "../../redux/features/cart/cartSlice";
-import { selectCurrentUser } from "../../redux/features/auth/authSlice";
-import { toast } from "sonner";
 
 const tags = ["Bike", "Mountain Bikes", "Road Bikes", "Hybrid Bikes"];
 
@@ -16,10 +14,10 @@ const ProductsDetails = () => {
 
   const dispatch = useAppDispatch();
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   // Check if the user is logged in
-  const user = useAppSelector(selectCurrentUser);
+  // const user = useAppSelector(selectCurrentUser);
 
   // Increase quantity
   const handleIncrease = () => {

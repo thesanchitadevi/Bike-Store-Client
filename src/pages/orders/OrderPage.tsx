@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect } from "react";
 import {
   clearCart,
@@ -48,7 +49,7 @@ const OrderPage = () => {
 
   const handlePlaceOrder = async () => {
     const orderData = {
-      products: cartItems.map((item) => ({
+      products: cartItems.map((item: any) => ({
         product: item.product, // Ensure this matches your product ID field
         quantity: item.quantity,
       })),
@@ -60,7 +61,7 @@ const OrderPage = () => {
     const result = await createOrder(orderData).unwrap();
 
     // Handle success (clear cart, show notification, etc.)
-    // console.log("Order created successfully:", result);
+    console.log("Order created successfully:", result);
   };
 
   if (isLoading) {
@@ -82,7 +83,7 @@ const OrderPage = () => {
           <div className="mt-8 space-y-3 rounded-lg border bg-white px-2 py-4 sm:px-6">
             {
               // Display cart items
-              cartItems.map((item) => (
+              cartItems.map((item: any) => (
                 <div className="flex flex-col rounded-lg bg-white sm:flex-row">
                   <img
                     className="m-2 h-24 w-28 rounded-md border object-cover object-center"
@@ -120,7 +121,7 @@ const OrderPage = () => {
               <span className="peer-checked:border-gray-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
               <label
                 className="peer-checked:border-2 peer-checked:border-gray-700 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
-                for="radio_1"
+                htmlFor="radio_1"
               >
                 <img
                   className="w-14 object-contain"
@@ -140,7 +141,10 @@ const OrderPage = () => {
             Complete your order by providing your details.
           </p>
           <div className="">
-            <label for="email" className="mt-4 mb-2 block text-sm font-medium">
+            <label
+              htmlFor="email"
+              className="mt-4 mb-2 block text-sm font-medium"
+            >
               Name
             </label>
             <div className="relative">
@@ -155,7 +159,10 @@ const OrderPage = () => {
                 <UserIcon className="h-5 w-5 text-gray-400" />
               </div>
             </div>
-            <label for="email" className="mt-4 mb-2 block text-sm font-medium">
+            <label
+              htmlFor="email"
+              className="mt-4 mb-2 block text-sm font-medium"
+            >
               Email
             </label>
             <div className="relative">
@@ -170,7 +177,10 @@ const OrderPage = () => {
                 <MailIcon className="h-5 w-5 text-gray-400" />
               </div>
             </div>
-            <label for="email" className="mt-4 mb-2 block text-sm font-medium">
+            <label
+              htmlFor="email"
+              className="mt-4 mb-2 block text-sm font-medium"
+            >
               Address
             </label>
             <div className="relative">

@@ -146,7 +146,7 @@ const DashboardLayout = () => {
                             <FaChevronDown className="w-4 h-4" />
                           )}
                         </button>
-                        {item.submenu && (
+                        {"submenu" in item && item.submenu && (
                           <ul
                             className={`pl-6 space-y-1 overflow-hidden transition-all duration-200 ease-in-out ${
                               openMenu === item.name

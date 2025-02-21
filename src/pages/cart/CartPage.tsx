@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { IconButton } from "@mui/material";
 import {
   decreaseQuantity,
@@ -31,7 +32,7 @@ const CartPage = () => {
         <div className="mx-auto max-w-5xl grid grid-cols-1 md:grid-cols-3 gap-6 px-4">
           {/* Cart Items Column */}
           <div className="col-span-2">
-            {cartItems.map((item) => (
+            {cartItems.map((item: any) => (
               <div className="rounded-lg mb-6" key={item.product}>
                 <div className="justify-between rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
                   <img

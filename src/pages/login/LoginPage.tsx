@@ -1,4 +1,4 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../redux/hooks";
 import { decodeToken } from "../../utils/decodeToken";
 import { setUser, TUser } from "../../redux/features/auth/authSlice";
@@ -10,7 +10,7 @@ import Logo from "../../assets/Logo";
 const LoginPage = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const location = useLocation(); // Get the current location
+  // const location = useLocation(); // Get the current location
 
   const [login, { error }] = useLoginMutation();
 

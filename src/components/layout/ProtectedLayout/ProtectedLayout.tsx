@@ -1,9 +1,6 @@
 import { ReactNode } from "react";
-import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
-import {
-  logout,
-  selectCurrentToken,
-} from "../../../redux/features/auth/authSlice";
+import { useAppSelector } from "../../../redux/hooks";
+import { selectCurrentToken } from "../../../redux/features/auth/authSlice";
 import { decodeToken } from "../../../utils/decodeToken";
 import { Navigate } from "react-router-dom";
 

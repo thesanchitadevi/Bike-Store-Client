@@ -1,11 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from "react";
 import { useGetAllProductsQuery } from "../../../../redux/features/products/products.api";
 import { useCreateOrderMutation } from "../../../../redux/features/order/order.api";
-import { useAppSelector } from "../../../../redux/hooks";
 import { toast } from "sonner";
 
 const AdminDashboardOrderAdd = () => {
-  const { user } = useAppSelector((state) => state.auth);
   const { data: products, isLoading, error } = useGetAllProductsQuery([]);
   const [createOrder] = useCreateOrderMutation();
 
@@ -25,7 +24,7 @@ const AdminDashboardOrderAdd = () => {
   }, [showSuccess]);
 
   const filteredProducts =
-    products?.data?.filter((product) =>
+    products?.data?.filter((product: any) =>
       product.name.toLowerCase().includes(searchTerm.toLowerCase())
     ) || [];
 
@@ -90,7 +89,7 @@ const AdminDashboardOrderAdd = () => {
           />
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4 max-h-96 overflow-y-auto p-2">
-            {filteredProducts.map((product) => (
+            {filteredProducts.map((product: any) => (
               <div
                 key={product._id}
                 className={`p-4 border rounded-lg cursor-pointer transition-all ${

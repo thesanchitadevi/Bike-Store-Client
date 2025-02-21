@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // src/components/CartSidebar.js
 import { Drawer, List, IconButton } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
@@ -11,7 +12,7 @@ import {
 import { Minus, Plus, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-const CartSidebar = ({ isOpen, onClose }) => {
+const CartSidebar = ({ isOpen, onClose }: any) => {
   const cartItems = useAppSelector(selectCartItems);
   const totalPrice = useAppSelector(selectTotalPrice);
   const dispatch = useAppDispatch();
@@ -58,7 +59,7 @@ const CartSidebar = ({ isOpen, onClose }) => {
           // Display when cart has items
           <>
             <List>
-              {cartItems.map((item) => (
+              {cartItems.map((item: any) => (
                 <div
                   key={item.product}
                   className="flex items-center gap-2 w-full py-5"

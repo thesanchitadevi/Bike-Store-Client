@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useRef, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
