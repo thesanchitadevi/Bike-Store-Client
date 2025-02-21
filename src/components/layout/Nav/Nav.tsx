@@ -74,7 +74,7 @@ const Nav = ({ openCartSidebar }) => {
           {/* Cart Button */}
           <button
             onClick={openCartSidebar}
-            className="relative p-4 cursor-pointer"
+            className="relative p-4 cursor-pointer "
           >
             <ShoppingCart />
             {
@@ -111,45 +111,47 @@ const Nav = ({ openCartSidebar }) => {
             {nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
           </div>
 
-          <div>
-            {/* Mobile Navigation Menu */}
-            <ul
-              className={
-                nav
-                  ? "fixed md:hidden left-0 top-0 w-[70%] h-full  shadow-lg ease-in-out duration-500 pt-20 z-50"
-                  : "ease-in-out w-[60%] duration-500 fixed top-0 bottom-0 left-[-100%] bg-white"
-              }
-            >
-              <>
-                {/* Mobile Logo */}
-                <div className="w-full text-2xl font-bold px-4 ">
-                  <NavLink to="/">
-                    <Logo />
-                  </NavLink>
-                </div>
+          {/* Mobile Navigation Menu */}
+          <div
+            className={`fixed top-0 left-0 h-screen w-[70%] bg-white shadow-lg transform ${
+              nav ? "translate-x-0" : "-translate-x-full"
+            } transition-transform duration-300 z-50`}
+          >
+            <div className="p-4 border-b border-gray-200">
+              {/* Mobile Logo */}
+              <NavLink to="/" className="text-2xl font-bold">
+                <Logo />
+              </NavLink>
+            </div>
 
-                {/* Mobile Navigation Items */}
-                {navItems.map((item) => (
-                  <li
-                    key={item.id}
-                    className="m-5 p-2 cursor-pointer duration-300 hover:text-[#BD2A2E] text-gray-700"
+            <ul className="mt-4">
+              {navItems.map((item) => (
+                <li
+                  key={item.id}
+                  className="p-4 border-b border-gray-200 cursor-pointer hover:bg-gray-100 duration-300"
+                >
+                  <NavLink
+                    to={item.link}
+                    className={`block text-gray-700 hover:text-[#BD2A2E] transition-all duration-300 ${
+                      item.link === location.pathname ? "text-[#BD2A2E]" : ""
+                    }`}
                   >
-                    <NavLink to={item.link}>
-                      <span
-                        className={`cursor-pointer hover:text-[#BD2A2E] transition-all duration-300 ${
-                          item.link === location.pathname
-                            ? "text-[#BD2A2E]"
-                            : ""
-                        }`}
-                      >
-                        {item.text}
-                      </span>
-                    </NavLink>
-                  </li>
-                ))}
-              </>
+                    {item.text}
+                  </NavLink>
+                </li>
+              ))}
             </ul>
           </div>
+
+          {/* Overlay to close sidebar when clicking outside */}
+          {/* This div covers the entire screen with a semi-transparent background when the sidebar is open */}
+          {/* Clicking anywhere on this overlay will close the sidebar by calling handleNav */}
+          {nav && (
+            <div
+              className="fixed inset-0 bg-black/10 bg-opacity-90 z-40"
+              onClick={handleNav}
+            ></div>
+          )}
         </>
       </div>
     </div>
