@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { useGetAllFProductsQuery } from "../../redux/features/products/products.api";
 import { SearchIcon, Star } from "lucide-react";
 import {
   FormControl,
@@ -15,6 +14,7 @@ import {
 import { useMemo, useState } from "react";
 import BestProducts from "../home/bestproducts/BestProducts";
 import Loading from "../../components/ui/Loading";
+import { useGetAllProductsQuery } from "../../redux/features/products/products.api";
 
 const ProductsPage = () => {
   const [filters, setFilters] = useState({
@@ -27,7 +27,7 @@ const ProductsPage = () => {
   });
 
   // Query without filters to get all products for extracting categories and brands
-  const { data: allProducts, isLoading } = useGetAllFProductsQuery([]);
+  const { data: allProducts, isLoading } = useGetAllProductsQuery([]);
 
   // Extract unique categories and brands using useMemo to avoid recalculation
   const { categories, brands } = useMemo(() => {
@@ -64,7 +64,7 @@ const ProductsPage = () => {
     }));
 
   // Get filtered products
-  const { data: filteredProducts } = useGetAllFProductsQuery(queryParams);
+  const { data: filteredProducts } = useGetAllProductsQuery(queryParams);
 
   const handleFilterChange = (name, value) => {
     setFilters((prev) => ({
@@ -116,7 +116,7 @@ const ProductsPage = () => {
   }
 
   return (
-    <div className="bg-gray-100 py-12">
+    <div className="py-12">
       <div className="container mx-auto px-4 ">
         <div className="text-center">
           <h1 className="text-4xl font-bold mb-4 animate-fade-in uppercase">

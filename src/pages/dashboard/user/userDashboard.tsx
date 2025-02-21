@@ -27,7 +27,7 @@ const UserDashboard = () => {
     );
 
   return (
-    <div className="min-h-screen ">
+    <div>
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="mb-8 text-center">

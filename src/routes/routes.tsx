@@ -20,6 +20,12 @@ import ContactPage from "../pages/Contact/ContactPage";
 import ProtectedRoutes from "./ProtectedRoutes";
 import UserProfile from "../pages/dashboard/user/userProfile";
 import AdminDashboard from "../pages/dashboard/admin/adminDashboard";
+import AdminProfile from "../pages/dashboard/admin/adminProfile";
+import AdminDashboardUsers from "../pages/dashboard/admin/users/users";
+import AdminDashboardAllProducts from "../pages/dashboard/admin/products/allProducts";
+import AdminDashboardProductAdd from "../pages/dashboard/admin/products/addProduct";
+import AdminDashboardOrderAdd from "../pages/dashboard/admin/orders/addOrders";
+import AdminDashboardAllOrders from "../pages/dashboard/admin/orders/allOrders";
 
 const router = createBrowserRouter([
   {
@@ -87,6 +93,30 @@ const router = createBrowserRouter([
       {
         path: "/admin/dashboard",
         element: <AdminDashboard />,
+      },
+      {
+        path: "/admin/dashboard/myProfile",
+        element: <AdminProfile />,
+      },
+      {
+        path: "/admin/dashboard/products/add",
+        element: <AdminDashboardProductAdd />,
+      },
+      {
+        path: "/admin/dashboard/products",
+        element: <AdminDashboardAllProducts />,
+      },
+      {
+        path: "/admin/dashboard/orders/add",
+        element: <AdminDashboardOrderAdd />,
+      },
+      {
+        path: "/admin/dashboard/orders",
+        element: <AdminDashboardAllOrders />,
+      },
+      {
+        path: "/admin/dashboard/users",
+        element: <AdminDashboardUsers />,
       },
     ],
   },

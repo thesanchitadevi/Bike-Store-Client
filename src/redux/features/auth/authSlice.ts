@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../store";
 
 export type TUser = {
+  _id?: string;
   userId: string;
   name: string;
   email: string;
@@ -10,6 +11,7 @@ export type TUser = {
   address: string; // Optional field
   iat: number; // issued at
   exp: number;
+  isBlocked: boolean;
 };
 
 type TAuthState = {

@@ -92,7 +92,7 @@ const UserOrders = () => {
               </div>
               <div className="space-y-1">
                 <p className="text-xs font-medium text-gray-500 tracking-wide">
-                  STATUS
+                  PAYMENT STATUS
                 </p>
                 <span
                   className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${getStatusBadgeStyle(

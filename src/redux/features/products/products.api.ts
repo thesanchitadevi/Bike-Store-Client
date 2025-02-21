@@ -4,7 +4,7 @@ import { baseApi } from "../../api/baseApi";
 
 const ProductsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getAllFProducts: builder.query({
+    getAllProducts: builder.query({
       query: (args) => {
         const params = new URLSearchParams();
 
@@ -26,6 +26,7 @@ const ProductsApi = baseApi.injectEndpoints({
           meta: response.meta,
         };
       },
+      providesTags: ["Products"],
     }),
 
     getSingleproduct: builder.query({
@@ -41,12 +42,32 @@ const ProductsApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["Products"],
+    }),
+
+    updateProduct: builder.mutation({
+      query: ({ data, id }) => ({
+        url: `/products/${id}`,
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ["Products"],
+    }),
+
+    deleteProduct: builder.mutation({
+      query: (id) => ({
+        url: `/products/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Products"],
     }),
   }),
 });
 
 export const {
-  useGetAllFProductsQuery,
+  useGetAllProductsQuery,
   useGetSingleproductQuery,
   useAddProductMutation,
+  useUpdateProductMutation,
+  useDeleteProductMutation,
 } = ProductsApi;

@@ -10,6 +10,8 @@ const OrderApi = baseApi.injectEndpoints({
         url: `/orders`,
         method: "GET",
       }),
+      providesTags: ["Orders"],
+
       transformResponse: (response: TResponseRedux<IOrderResponse[]>) => ({
         data: response.data,
         meta: response.meta,
@@ -51,19 +53,21 @@ const OrderApi = baseApi.injectEndpoints({
 
     // Update order status
     updateOrderStatus: builder.mutation({
-      query: ({ id, status }: { id: string; status: string }) => ({
+      query: ({ id, orderStatus }: { id: string; orderStatus: string }) => ({
         url: `/orders/${id}`,
         method: "PATCH",
-        body: { status },
+        body: { orderStatus },
       }),
+      invalidatesTags: ["Orders"],
     }),
 
     // Delete order
     deleteOrder: builder.mutation({
-      query: (id: string) => ({
+      query: (id) => ({
         url: `/orders/${id}`,
         method: "DELETE",
       }),
+      invalidatesTags: ["Orders"],
     }),
 
     // Verify payment
