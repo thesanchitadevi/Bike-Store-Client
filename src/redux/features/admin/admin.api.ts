@@ -30,10 +30,10 @@ const AdminApi = baseApi.injectEndpoints({
 
     /* block user */
     blockUser: builder.mutation({
-      query: ({ id, updates }) => ({
-        url: `/users/${id}`,
+      query: ({ userId, isBlocked }) => ({
+        url: `/users/${userId}`,
         method: "PATCH",
-        body: updates,
+        body: { isBlocked }, // { isBlocked: true }
       }),
     }),
   }),

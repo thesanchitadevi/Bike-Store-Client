@@ -85,20 +85,25 @@ const AdminDashboardUsers = () => {
                         : "bg-green-100 text-green-800"
                     }`}
                   >
-                    {user.isBlocked ? "Blocked" : "Active"}
+                    {user.isBlocked ? "Deactive" : "Active"}
                   </span>
                 </td>
 
                 <td className="px-6 py-4 whitespace-nowrap">
                   <button
-                    onClick={() => handleBlockUser(user._id, user.isBlocked)}
+                    onClick={() =>
+                      handleBlockUser(
+                        user._id as string,
+                        user.isBlocked as boolean
+                      )
+                    }
                     className={`px-3 py-1 rounded-md text-sm font-medium ${
                       user.isBlocked
                         ? "bg-green-500 hover:bg-green-600 text-white"
                         : "bg-red-500 hover:bg-red-600 text-white"
                     }`}
                   >
-                    {user.isBlocked ? "Unblock" : "Block"}
+                    {user.isBlocked ? "Reactivate" : "Block"}
                   </button>
                 </td>
               </tr>
