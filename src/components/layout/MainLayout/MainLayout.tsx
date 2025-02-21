@@ -3,11 +3,13 @@ import Footer from "../Footer/Footer";
 import Nav from "../Nav/Nav";
 import { useState } from "react";
 import CartSidebar from "../../../pages/cart/CartSideBar";
+import ScrollToTop from "../../ui/ScrollToTop";
 
 const MainLayout = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   return (
-    <div className="font-Roboto">
+    <div className="app-wrapper">
+      <ScrollToTop />
       <Nav openCartSidebar={() => setIsCartOpen(true)} />
       <Outlet />
       {/* Cart Sidebar */}

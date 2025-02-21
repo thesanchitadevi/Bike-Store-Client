@@ -12,11 +12,11 @@ const PromoBanner = () => {
         <div className="absolute inset-0 bg-black opacity-80"></div>
       </div>
 
-      <div className="relative z-10 flex flex-col justify-center items-center h-full text-center">
-        <p className="text-lg font-semibold mb-4 tracking-[2rem]">
+      <div className="relative z-10 flex flex-col justify-center items-center h-full text-center py-5">
+        <p className="text-md md:text-lg font-semibold mb-4 tracking-[0.5rem] md:tracking-[2rem]">
           SPRING 2025
         </p>
-        <h1 className="text-7xl font-bold leading-tight mb-4 uppercase">
+        <h1 className="text-4xl md:text-7xl font-bold leading-tight mb-4 uppercase">
           Best Quality Products
         </h1>
 

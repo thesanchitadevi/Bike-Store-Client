@@ -161,16 +161,31 @@ const ProductsDetails = () => {
                   {product.brand}
                 </span>
               </div>
+              {/* Model */}
+              <div className="flex items-center mb-4">
+                <span className="font-bold text-gray-700 dark:text-gray-300 mr-2">
+                  Model:{" "}
+                </span>
+                <span className="text-gray-600 dark:text-gray-300">
+                  {product.model}
+                </span>
+              </div>
               {/* Tags */}
-              <div className="flex md:items-center mb-4">
-                <span className="font-bold text-gray-700  mr-2">Tags: </span>
-                <span className="text-gray-600">
+              <div className="flex flex-col md:flex-row md:items-center mb-4">
+                <span className="font-bold text-gray-700 mr-2 mb-2 md:mb-0">
+                  Tags:
+                </span>
+                <div className="flex flex-wrap gap-2">
                   {tags.map((tag, index) => (
-                    <span key={index} className="mr-2">
+                    <span
+                      key={index}
+                      className="inline-flex items-center px-3 rounded-sm text-sm font-medium border transition-colors
+                   border-gray-300 text-gray-700 hover:border-gray-400 hover:text-gray-800 hover:bg-gray-50"
+                    >
                       {tag}
                     </span>
                   ))}
-                </span>
+                </div>
               </div>
             </div>
           </div>
