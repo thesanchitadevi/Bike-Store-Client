@@ -27,10 +27,11 @@ const AdminDashboardOrderAdd = () => {
     }
   }, [showSuccess]);
 
-  const filteredProducts =
-    products?.data?.filter((product: any) =>
-      product.name.toLowerCase().includes(searchTerm.toLowerCase())
-    ) || [];
+  const filteredProducts = Array.isArray(products?.data)
+    ? products.data.filter((product: any) =>
+        product.name.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    : [];
 
   const handleQuantity = (productId: string, operation: "inc" | "dec") => {
     setQuantities((prev) => ({
