@@ -28,7 +28,7 @@ const AdminDashboardOrderAdd = () => {
   }, [showSuccess]);
 
   const filteredProducts =
-    [products?.data].filter((product: any) =>
+    products?.data?.filter((product: any) =>
       product.name.toLowerCase().includes(searchTerm.toLowerCase())
     ) || [];
 

@@ -292,7 +292,7 @@ const ProductsPage = () => {
         {/* Product Card */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
           {Array.isArray(filteredProducts?.data) &&
-            filteredProducts?.data.map(
+            filteredProducts.data.map(
               (product: {
                 _id: Key | null | undefined;
                 image: string | undefined;
@@ -398,7 +398,7 @@ const ProductsPage = () => {
         {
           // Show message if no products are found
           Array.isArray(filteredProducts?.data) &&
-            filteredProducts?.data.length === 0 && (
+            filteredProducts.data.length === 0 && (
               <div className="text-center mt-8 text-gray-500">
                 No products found with the selected filters.
               </div>

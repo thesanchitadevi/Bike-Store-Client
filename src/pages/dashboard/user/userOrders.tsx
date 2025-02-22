@@ -12,6 +12,8 @@ const UserOrders = () => {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const orders = ordersResponse?.data || [];
+  console.log(orders);
+
   const totalPages = ordersResponse?.meta?.totalPage || 1;
 
   useEffect(() => {
@@ -91,7 +93,7 @@ const UserOrders = () => {
                   TOTAL AMOUNT
                 </p>
                 <p className="text-base font-semibold text-gray-800">
-                  ${order.totalPrice}
+                  ৳{order.totalPrice}
                 </p>
               </div>
               <div className="space-y-1">
@@ -138,19 +140,19 @@ const UserOrders = () => {
                 <div className="space-y-3">
                   {order.products.map((item) => (
                     <div
-                      key={item.product._id}
+                      key={item?.product?._id}
                       className="flex justify-between items-center text-sm bg-white p-3 rounded-lg shadow-xs"
                     >
                       <div>
                         <span className="font-medium text-gray-800">
-                          {item.product.name}
+                          {item?.product?.name}
                         </span>
                         <span className="text-gray-500 ml-2">
-                          ×{item.quantity}
+                          ×{item?.quantity}
                         </span>
                       </div>
                       <span className="text-gray-700 font-medium">
-                        ${(item.product.price * item.quantity).toFixed(2)}
+                        ৳{(item?.product?.price * item?.quantity).toFixed(2)}
                       </span>
                     </div>
                   ))}
