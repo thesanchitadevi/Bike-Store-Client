@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from "react";
 import { logout } from "../../../redux/features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
@@ -10,7 +9,7 @@ const ProfileDropDown = () => {
   const navigate = useNavigate();
 
   // State to manage the navbar's visibility
-  const [showProfileDropdown, setShowProfileDropdown] = useState(false);
+  const [, setShowProfileDropdown] = useState(false);
 
   const handleLogout = () => {
     dispatch(logout()); // Dispatch logout action

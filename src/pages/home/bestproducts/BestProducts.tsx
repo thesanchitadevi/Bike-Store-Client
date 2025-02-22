@@ -6,9 +6,9 @@ import { useGetAllProductsQuery } from "../../../redux/features/products/product
 const BestProducts = () => {
   const { data: products, isLoading } = useGetAllProductsQuery(undefined);
 
-  const bestSellingProducts = products?.data?.filter(
-    (product) => product.quantity < 150
-  );
+  const bestSellingProducts = Array.isArray(products?.data)
+    ? products.data.filter((product) => product.quantity < 150)
+    : [];
 
   if (isLoading) {
     return <div>Loading...</div>;

@@ -31,7 +31,9 @@ const AdminDashboardAllProducts = () => {
 
   const [deleteProduct] = useDeleteProductMutation();
 
-  const products = response?.data || [];
+  const products: TProduct[] = Array.isArray(response?.data)
+    ? response.data
+    : [];
   const totalPages = response?.meta?.totalPage || 1;
 
   const handleConfirmDelete = async () => {
@@ -42,7 +44,7 @@ const AdminDashboardAllProducts = () => {
       toast.success("Product deleted successfully!");
 
       // Adjust page if last item on current page is deleted
-      if (products.length === 1 && page > 1) {
+      if (Array.isArray(products) && products.length === 1 && page > 1) {
         setPage((prev) => prev - 1);
       }
     } catch (error) {

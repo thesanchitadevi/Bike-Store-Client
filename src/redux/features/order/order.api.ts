@@ -10,7 +10,7 @@ const OrderApi = baseApi.injectEndpoints({
         url: `/orders`,
         method: "GET",
       }),
-      providesTags: ["Orders"],
+      providesTags: ["order"],
 
       transformResponse: (response: TResponseRedux<IOrderResponse[]>) => ({
         data: response.data,
@@ -58,7 +58,7 @@ const OrderApi = baseApi.injectEndpoints({
         method: "PATCH",
         body: { orderStatus },
       }),
-      invalidatesTags: ["Orders"],
+      invalidatesTags: ["order"],
     }),
 
     // Delete order
@@ -67,7 +67,7 @@ const OrderApi = baseApi.injectEndpoints({
         url: `/orders/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["Orders"],
+      invalidatesTags: ["order"],
     }),
 
     // Verify payment

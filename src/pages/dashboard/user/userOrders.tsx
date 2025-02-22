@@ -1,23 +1,27 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from "react";
 import { useMyOrdersQuery } from "../../../redux/features/order/order.api";
 
 const UserOrders = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const { data: ordersResponse, isLoading } = useMyOrdersQuery({
-    page: currentPage,
-    limit: 10,
-  });
+  const [page, setPage] = useState(1);
+  const limit = 10;
+  const { data: ordersResponse, isLoading } = useMyOrdersQuery([
+    { name: "page", value: page },
+    { name: "limit", value: limit },
+  ]);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const orders = ordersResponse?.data || [];
-  const meta = ordersResponse?.meta || {};
+  const totalPages = ordersResponse?.meta?.totalPage || 1;
 
   useEffect(() => {
-    if (meta.page !== undefined && meta.page !== currentPage) {
-      setCurrentPage(meta.page);
+    // Adjust page if last item on current page is deleted
+    if (Array.isArray(orders) && orders.length === 1 && page > 1) {
+      setPage((prev) => prev - 1);
     }
-  }, [meta.page]);
+  }, [orders, page]);
 
-  const getStatusBadgeStyle = (status) => {
+  const getStatusBadgeStyle = (status: any) => {
     switch (status.toLowerCase()) {
       case "paid":
         return "bg-green-100 text-green-800";
@@ -134,7 +138,7 @@ const UserOrders = () => {
                 <div className="space-y-3">
                   {order.products.map((item) => (
                     <div
-                      key={item._id}
+                      key={item.product._id}
                       className="flex justify-between items-center text-sm bg-white p-3 rounded-lg shadow-xs"
                     >
                       <div>
@@ -157,29 +161,36 @@ const UserOrders = () => {
         ))}
       </div>
 
-      {meta?.totalPages > 1 && (
-        <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="text-sm text-gray-500">
-            Showing page {currentPage} of {meta.totalPages}
-          </div>
-          <div className="flex gap-2">
-            <button
-              onClick={() => setCurrentPage((p) => p - 1)}
-              disabled={isLoading || currentPage === 1}
-              className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-            >
-              Previous
-            </button>
-            <button
-              onClick={() => setCurrentPage((p) => p + 1)}
-              disabled={isLoading || currentPage === meta.totalPages}
-              className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-            >
-              Next
-            </button>
-          </div>
+      {/* Pagination */}
+      <div className="flex flex-col sm:flex-row justify-between items-center mt-4 gap-4">
+        <div className="text-sm text-gray-700">
+          Page {page} of {totalPages}
         </div>
-      )}
+        <div className="flex gap-2">
+          <button
+            onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+            disabled={page === 1}
+            className={`px-4 py-2 text-sm rounded-md ${
+              page === 1
+                ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                : "bg-blue-500 text-white hover:bg-blue-600"
+            }`}
+          >
+            Previous
+          </button>
+          <button
+            onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
+            disabled={page === totalPages}
+            className={`px-4 py-2 text-sm rounded-md ${
+              page === totalPages
+                ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                : "bg-blue-500 text-white hover:bg-blue-600"
+            }`}
+          >
+            Next
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

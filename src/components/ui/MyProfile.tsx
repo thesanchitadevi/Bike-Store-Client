@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 
 import {
@@ -36,7 +37,7 @@ const MyProfile = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  const handlePasswordChange = async (e) => {
+  const handlePasswordChange = async (e: any) => {
     e.preventDefault();
     setError("");
     setSuccess("");
@@ -61,7 +62,7 @@ const MyProfile = () => {
         newPassword: "",
       });
       setIsEditingPassword(false);
-    } catch (err) {
+    } catch (err: any) {
       setError(
         err.data?.message || "Failed to change password. Please try again."
       );

@@ -5,7 +5,11 @@ import { useCreateOrderMutation } from "../../../../redux/features/order/order.a
 import { toast } from "sonner";
 
 const AdminDashboardOrderAdd = () => {
-  const { data: products, isLoading, error } = useGetAllProductsQuery([]);
+  const {
+    data: products,
+    isLoading,
+    error,
+  } = useGetAllProductsQuery(undefined);
   const [createOrder] = useCreateOrderMutation();
 
   const [selectedProducts, setSelectedProducts] = useState<
@@ -24,7 +28,7 @@ const AdminDashboardOrderAdd = () => {
   }, [showSuccess]);
 
   const filteredProducts =
-    products?.data?.filter((product: any) =>
+    [products?.data].filter((product: any) =>
       product.name.toLowerCase().includes(searchTerm.toLowerCase())
     ) || [];
 

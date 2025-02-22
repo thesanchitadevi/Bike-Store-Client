@@ -3,6 +3,12 @@ import { useAppSelector } from "../../../redux/hooks";
 import { selectCurrentToken } from "../../../redux/features/auth/authSlice";
 import { decodeToken } from "../../../utils/decodeToken";
 import { Navigate } from "react-router-dom";
+import { JwtPayload } from "jwt-decode";
+
+// Define custom token type
+interface CustomJwtPayload extends JwtPayload {
+  role: string;
+}
 
 type TProtectedLayout = {
   children: ReactNode;
@@ -14,7 +20,7 @@ const ProtectedLayout = ({ children, role }: TProtectedLayout) => {
   let user;
 
   if (token) {
-    user = decodeToken(token);
+    user = decodeToken(token) as CustomJwtPayload;
   }
 
   // const dispatch = useAppDispatch();

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Loading from "../../../components/ui/Loading";
 import { useMyOrdersQuery } from "../../../redux/features/order/order.api";
 
@@ -6,7 +7,7 @@ const UserDashboard = () => {
 
   const orders = ordersResponse?.data || [];
 
-  const getStatusBadgeStyle = (status) => {
+  const getStatusBadgeStyle = (status: any) => {
     switch (status?.toLowerCase()) {
       case "paid":
         return "bg-green-100 text-green-800";
@@ -74,11 +75,14 @@ const UserDashboard = () => {
                   </div>
                   <p className="text-sm font-medium text-gray-600">
                     Order Date:{" "}
-                    {new Date(order?.createdAt).toLocaleDateString("en-US", {
-                      year: "numeric",
-                      month: "short",
-                      day: "numeric",
-                    })}
+                    {new Date(order?.createdAt ?? "").toLocaleDateString(
+                      "en-US",
+                      {
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric",
+                      }
+                    )}
                   </p>
                 </div>
                 <div className="text-right flex items-center space-x-4">

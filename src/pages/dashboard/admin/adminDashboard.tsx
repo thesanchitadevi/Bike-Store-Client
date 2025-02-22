@@ -26,7 +26,7 @@ const AdminDashboard = () => {
           <div className="bg-white p-6 rounded-lg shadow-sm">
             <h3 className="text-gray-500 text-sm mb-2">Total Products</h3>
             <p className="text-2xl font-bold text-gray-800">
-              {products?.data?.length}
+              {Array.isArray(products?.data) ? products.data.length : 0}
             </p>
           </div>
 
