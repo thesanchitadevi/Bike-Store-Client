@@ -105,7 +105,7 @@ const ProductsPage = () => {
     return () => clearTimeout(timeoutId);
   };
 
-  const handlePriceChange = (event: any, newValue: any[]) => {
+  const handlePriceChange = (_event: any, newValue: any[]) => {
     setFilters((prev) => ({
       ...prev,
       minPrice: newValue[0],
