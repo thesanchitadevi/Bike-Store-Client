@@ -1,26 +1,26 @@
 export const BrandLogoList = [
   {
     name: "logo1",
-    logo: "/src/assets/logos/logo1.png",
+    logo: "https://i.postimg.cc/R0XLr6gS/logo1.png",
   },
   {
     name: "logo2",
-    logo: "/src/assets/logos/logo2.png",
+    logo: "https://i.postimg.cc/SQ3frnSB/logo2.png",
   },
   {
     name: "logo3",
-    logo: "/src/assets/logos/logo3.png",
+    logo: "https://i.postimg.cc/bNf2rkNw/logo3.png",
   },
   {
     name: "logo4",
-    logo: "/src/assets/logos/logo4.png",
+    logo: "https://i.postimg.cc/KcDm7MDz/logo4.png",
   },
   {
     name: "logo5",
-    logo: "/src/assets/logos/logo5.png",
+    logo: "https://i.postimg.cc/wvknNhYY/logo5.png",
   },
   {
     name: "logo6",
-    logo: "/src/assets/logos/logo6.png",
+    logo: "https://i.postimg.cc/76Pmpddj/logo6.png",
   },
 ];
