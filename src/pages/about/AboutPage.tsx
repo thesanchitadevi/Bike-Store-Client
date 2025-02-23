@@ -19,7 +19,7 @@ const Card = ({ title, description }: CardProps) => {
 
 const AboutPage = () => {
   return (
-    <div className="bg-gray-100 py-12">
+    <div className=" py-12">
       <div className="container mx-auto px-6 md:px-12">
         <div className="text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">

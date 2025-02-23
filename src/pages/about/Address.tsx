@@ -4,7 +4,7 @@ const Address = () => {
       <div className="max-w-6xl mx-auto py-16 px-4  md:py-15 md:px-0">
         <div className="mt-16 md:mt-20">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="rounded-md overflow-hidden">
+            <div className="rounded-md overflow-hidden shadow-lg">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d1825.2657613590618!2d90.4131124!3d23.7996912!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbd!4v1738076330217!5m2!1sen!2sbd"
                 width="100%"
