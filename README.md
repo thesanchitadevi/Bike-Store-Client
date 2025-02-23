@@ -12,6 +12,12 @@ A modern e-commerce frontend application for a bike store built with React, Redu
 - Redux-based state management
 - Type-safe codebase with TypeScript
 
+# Live URL
+
+-**_Server_**:(https://bike-store-pied.vercel.app)[https://bike-store-pied.vercel.app]
+
+-**_Client_**:(https://bike-store-client-alpha.vercel.app)[https://bike-store-client-alpha.vercel.app]
+
 ## Installation
 
 1. Clone the repository:
@@ -30,6 +36,7 @@ A modern e-commerce frontend application for a bike store built with React, Redu
    ```
 
 ## Project Structure
+
 ```
 src/
 ├── assets/      # Static assets (images, fonts)
@@ -46,6 +53,7 @@ src/
 ├── types/       # TypeScript type declarations
 ├── utils/       # Utility functions/helpers
 ```
+
 ### Available Scripts
 
 `npm run dev`: Start development server
@@ -54,12 +62,11 @@ src/
 
 ## Key Dependencies
 
-- React + TypeScript
-
-- Redux Toolkit
-- React Router
-- Sonner (Toast notifications)
-- Tailwind CSS (or other styling solution)
+- **_React + TypeScript_**
+- **_Redux Toolkit_**
+- **_React Router_**
+- **_Sonner (Toast notifications)_**
+- **_Tailwind CSS (or other styling solution)_**
 
 ## State Management
 
