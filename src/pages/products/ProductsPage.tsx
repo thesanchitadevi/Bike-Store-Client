@@ -106,7 +106,14 @@ const ProductsPage = () => {
   }, [filters, page, limit]);
 
   // Query without filters to get all products for extracting categories and brands
-  const { data: allProducts, isLoading } = useGetAllProductsQuery([]);
+  const {
+    data: allProducts,
+    isLoading,
+    isFetching,
+  } = useGetAllProductsQuery([]);
+
+  // Show loading state if fetching all products
+  const loadingState = isLoading || isFetching;
 
   // Get filtered products with pagination
   const { data: filteredProducts } = useGetAllProductsQuery(queryParams);
@@ -444,6 +451,10 @@ const ProductsPage = () => {
           <div className="w-full md:w-3/4">
             {/* Products Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {loadingState &&
+                Array.from({ length: 6 }).map((_, index) => (
+                  <CardSkeleton key={`skeleton-${index}`} />
+                ))}
               {Array.isArray(filteredProducts?.data) &&
                 filteredProducts.data.map((product) => (
                   <ProductCard key={product._id} product={product} />
