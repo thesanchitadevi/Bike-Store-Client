@@ -37,7 +37,7 @@ const AdminDashboardUsers = () => {
     <div className="p-6 max-w-7xl mx-auto">
       <h2 className="text-2xl font-bold mb-6">Manage Users</h2>
 
-      <div className="overflow-x-auto rounded-lg border">
+      <div className="overflow-x-auto rounded-lg border border-gray-200">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>

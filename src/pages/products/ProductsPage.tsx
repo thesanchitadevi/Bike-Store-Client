@@ -386,7 +386,7 @@ const ProductsPage = () => {
               </FormControl>
 
               {/* Active Filters */}
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 pt-2">
                 {Object.entries(filters).map(([key, value]) => {
                   if (value && key !== "minPrice" && key !== "maxPrice") {
                     if (key === "search") {

@@ -77,7 +77,7 @@ const AdminDashboardOrderAdd = () => {
     return <div className="p-4 text-red-500">Error loading products</div>;
 
   return (
-    <div className="max-w-6xl mx-auto p-4">
+    <div className="max-w-7xl mx-auto p-4">
       {/* Order create by admin */}
 
       <h1 className="text-3xl font-bold mb-8 text-gray-800">Add New Order</h1>
@@ -217,7 +217,7 @@ const AdminDashboardOrderAdd = () => {
                 <button
                   type="submit"
                   onClick={handleSubmit}
-                  className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+                  className="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium"
                 >
                   Place Order
                 </button>
