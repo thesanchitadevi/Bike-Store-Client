@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const PromoBanner = () => {
   return (
-    <div className="relative bg-gradient-to-r from-purple-600 to-blue-600 h-100 text-white overflow-hidden">
+    <div className="relative bg-gradient-to-r from-purple-600 to-blue-600 h-100 text-white overflow-hidden my-10">
       <div className="absolute inset-0">
         <img
           src="https://images.pexels.com/photos/9534369/pexels-photo-9534369.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"

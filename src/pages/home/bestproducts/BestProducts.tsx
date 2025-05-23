@@ -15,7 +15,7 @@ const BestProducts = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 my-15">
+    <div className="container max-w-6xl mx-auto md:px-0 px-5 py-4">
       <div className="text-center">
         <h1 className="text-4xl font-bold mb-4 animate-fade-in uppercase">
           Best Products

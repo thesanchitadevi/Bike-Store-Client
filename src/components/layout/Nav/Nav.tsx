@@ -48,7 +48,7 @@ const Nav = ({ openCartSidebar }: NavProps) => {
 
   return (
     <div className="sticky top-0 z-50 bg-white/80 backdrop-blur-md backdrop-filter border-b border-gray-200">
-      <div className="flex justify-between items-center h-20 max-w-7xl mx-auto md:px-0 px-5">
+      <div className="flex justify-between items-center h-20 max-w-6xl mx-auto md:px-0 px-5">
         {/* Logo */}
         <NavLink to="/" className="w-full text-3xl font-bold flex-1">
           <Logo />

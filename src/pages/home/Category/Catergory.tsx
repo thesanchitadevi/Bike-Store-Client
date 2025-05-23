@@ -4,14 +4,14 @@ import { FaArrowRightLong } from "react-icons/fa6";
 
 const Category = () => {
   return (
-    <div className="container mx-auto pt-10">
+    <div className="container max-w-6xl mx-auto md:px-0 px-5 py-4">
       {/* Header */}
       <div className="text-center">
         <h1 className="text-4xl font-bold mb-4 animate-fade-in text-[#1F2024]">
           SHOP BY CATEGORY
         </h1>
       </div>
-      <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-6 lg:px-12 ">
+      <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 ">
         {CategoryData.map((category, index) => (
           <Link
             to={category.link}

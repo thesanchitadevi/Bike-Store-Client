@@ -4,7 +4,7 @@ import { OfferData } from "./offer.data";
 const OfferBanners = () => {
   return (
     <section className="w-full py-10 bg-gray-50">
-      <div className="container mx-auto px-4">
+      <div className="container max-w-6xl mx-auto md:px-0 px-5 py-4">
         <div className="flex flex-col md:flex-row gap-6 md:gap-8">
           {OfferData.map((offer, index) => (
             <div

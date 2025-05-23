@@ -3,7 +3,7 @@ import { services } from "./Service.data";
 export default function Services() {
   return (
     <div className="py-12">
-      <div className="container mx-auto">
+      <div className="container max-w-6xl mx-auto md:px-0 px-5 py-4">
         {/* Header */}
         <div className="text-center">
           <h1 className="text-4xl font-bold mb-4 animate-fade-in text-[#1F2024] uppercase">
@@ -17,7 +17,7 @@ export default function Services() {
         </div>
 
         {/* Services Grid */}
-        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-6 lg:px-12">
+        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 ">
           {services.map((service, index) => (
             <div
               key={index}

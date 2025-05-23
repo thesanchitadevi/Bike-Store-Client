@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Star } from "lucide-react";
+
 import { TProduct } from "../../../types/product.type";
 import { useGetAllProductsQuery } from "../../../redux/features/products/products.api";
 
@@ -11,7 +11,7 @@ const FeaturedProductsPage = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 ">
+    <div className="container max-w-6xl mx-auto md:px-0 px-5 py-4">
       <div className="text-center">
         <h1 className="text-4xl font-bold mb-4 animate-fade-in uppercase">
           Featured Products
@@ -23,87 +23,90 @@ const FeaturedProductsPage = () => {
         </p>
       </div>
       {/* Product Card */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
         {Array.isArray(products?.data) &&
           products?.data.slice(0, 4).map((product: TProduct) => (
-            <>
-              <Link
-                to={`/product/${product._id}`}
-                key={product._id}
-                className="bg-white rounded-sm overflow-hidden shadow-lg ring-2 ring-gray-200 ring-opacity-20 transition-all duration-300 hover:shadow-xl"
-              >
+            <div
+              key={product._id}
+              className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100"
+            >
+              <Link to={`/product/${product._id}`}>
                 <div className="relative">
                   <img
-                    className="w-full h-64 object-cover object-center"
+                    className="w-full h-56 object-cover object-center"
                     src={product.image}
-                    alt="Product Image"
+                    alt={product.name}
                   />
-                  {
-                    // Sale Badge
-                    product.quantity < 5 && (
-                      <div className="absolute top-0 right-0 bg-red-500 text-white px-2 py-1 m-2 rounded-md text-sm font-medium">
+                  {/* Badges */}
+                  <div className="absolute top-2 left-2 flex flex-col space-y-1">
+                    {new Date(product.createdAt) >=
+                      new Date(
+                        new Date().setDate(new Date().getDate() - 3)
+                      ) && (
+                      <span className="bg-[#BD2A2E] text-white text-xs px-2 py-1 rounded">
+                        NEW
+                      </span>
+                    )}
+                    {product.quantity < 5 && (
+                      <span className="bg-red-500 text-white text-xs px-2 py-1 rounded">
                         SALE
-                      </div>
-                    )
-                  }
-                  {/* New badge */}
-                  {new Date(product.createdAt) >=
-                    new Date(new Date().setDate(new Date().getDate() - 3)) && (
-                    <div className="absolute top-0 left-0 bg-[#BD2A2E] text-gray-200 font-sm px-2.5 py-1 m-2 text-xs ">
-                      NEW
-                    </div>
-                  )}
+                      </span>
+                    )}
+                  </div>
                 </div>
+
                 <div className="p-4">
-                  <h3 className="text-lg font-medium mb-2">{product.name}</h3>
-                  {/* Rating */}
-                  <div className="my-3 flex items-center">
-                    {[...Array(5)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className={`h-5 w-5 ${
-                          i < Math.round(4)
-                            ? "text-yellow-400"
-                            : "text-gray-300"
-                        }`}
-                      />
-                    ))}
-                    <span className="ml-2 text-sm text-gray-500">
-                      ({4} reviews)
+                  {/* Product Meta Info */}
+                  <div className="flex justify-between items-start mb-2">
+                    <div>
+                      <span className="text-sm font-medium text-gray-500">
+                        {product.brand}
+                      </span>
+                      <span className="mx-2 text-gray-300">|</span>
+                      <span className="text-sm font-medium text-gray-500">
+                        {product.category}
+                      </span>
+                    </div>
+                    <span className="text-xs bg-gray-100 px-2 py-1 rounded">
+                      {product.model}
                     </span>
                   </div>
-                  <div className="flex items-center justify-between">
-                    <span className="font-semibold text-medium">
+
+                  {/* Product Name */}
+                  <h3 className="text-lg font-semibold mb-3 line-clamp-1">
+                    {product.name}
+                  </h3>
+
+                  {/* Price and Stock */}
+                  <div className="flex justify-between items-center mt-4">
+                    <span className="font-bold text-lg text-[#BD2A2E]">
                       {product.price} BDT
                     </span>
-                    {
-                      // Out of Stock Badge
-                      product.quantity === 0 ? (
-                        <span className="text-[#BD2A2E] px-2 py-1 text-sm font-semibold">
-                          OUT OF STOCK
-                        </span>
-                      ) : (
-                        <span className="text-green-800 px-2 py-1 rounded-md text-sm font-semibold">
-                          IN STOCK
-                        </span>
-                      )
-                    }
+                    <span
+                      className={`text-xs font-semibold px-2 py-1 rounded ${
+                        product.quantity === 0
+                          ? "bg-red-100 text-red-800"
+                          : "bg-green-100 text-green-800"
+                      }`}
+                    >
+                      {product.quantity === 0 ? "OUT OF STOCK" : "IN STOCK"}
+                    </span>
                   </div>
-                  <div>
-                    <button className=" bg-transparent text-gray-600 hover:text-[#BD2A2E] font-bold py-4 px-4 rounded w-full mt-4 cursor-pointer">
-                      View Details
-                    </button>
-                  </div>
+
+                  {/* View Details Button */}
+                  <button className="w-full mt-4 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-2 px-4 rounded transition-colors duration-300">
+                    View Details
+                  </button>
                 </div>
               </Link>
-            </>
+            </div>
           ))}
       </div>
 
       {/* All Products Button */}
       <div className="text-center mt-12">
         <Link to="/products">
-          <button className="bg-[#BD2A2E] text-white py-4 px-8 font-semibold hover:bg-gray-800 cursor-pointer uppercase">
+          <button className="bg-[#BD2A2E] text-white py-3 px-8 font-semibold hover:bg-gray-800 cursor-pointer uppercase transition-colors duration-300 rounded">
             View All Products
           </button>
         </Link>

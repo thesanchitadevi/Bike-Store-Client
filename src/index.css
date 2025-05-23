@@ -107,8 +107,8 @@ Neutral Color:  (#F5F5F5) */
   display: flex;
 }
 .hero .main-content .slider-content .main-slider .swiper-slide {
-  height: 500px;
-  background-size: cover;
+  height: 450px;
+  background-size: cover contain;
 }
 .hero .main-content .slider-content .main-slider .slide-1 {
   background-image: url(/src/assets/hero-bg/1.jpg);
