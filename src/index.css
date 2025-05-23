@@ -156,3 +156,19 @@ Neutral Color:  (#F5F5F5) */
   -webkit-animation-delay: 1.5s;
   animation-delay: 1.5s;
 }
+
+/* Add this to your global CSS */
+.group:hover .group-hover\:visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+.group:hover .group-hover\:block {
+  display: block;
+}
+
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}

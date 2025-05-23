@@ -28,8 +28,8 @@ const social = [
 const Footer = () => {
   return (
     <footer>
-      <div className="bg-[#1F2024] py-10 text-gray-100">
-        <div className="container px-4 mx-auto">
+      <div className="bg-[#1F2024] py-10 text-gray-100 mt-5">
+        <div className="container max-w-6xl mx-auto md:px-0 px-5 py-4">
           <div className="flex flex-wrap justify-between">
             <div className="w-full xl:w-1/5">
               <Link to="/" className="block w-56 mb-2">
@@ -102,7 +102,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="bg-[#1F2024] py-4 text-gray-100 border-t border-[#2C2D31]">
-        <div className="container mx-auto px-4">
+        <div className="container max-w-6xl mx-auto md:px-0 px-5 py-4">
           <div className="-mx-4 flex flex-wrap justify-between">
             <div className="px-4 w-full text-center sm:w-auto sm:text-left">
               © {moment().format("yyyy")}.{" "}

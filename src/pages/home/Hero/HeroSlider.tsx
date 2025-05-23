@@ -38,7 +38,7 @@ function HeroSlider() {
                           </h1>
                           <div className="slide-btn">
                             <a
-                              href="#"
+                              href="/products"
                               className="btn-1 inline-block bg-red-600 hover:bg-red-700 px-8 py-3 rounded-lg transition-colors duration-300"
                             >
                               Explore Models
@@ -59,7 +59,7 @@ function HeroSlider() {
                           </h1>
                           <div className="slide-btn">
                             <a
-                              href="#"
+                              href="/products"
                               className="btn-1 inline-block bg-red-600 hover:bg-red-700 px-8 py-3 rounded-lg transition-colors duration-300"
                             >
                               Shop Now
