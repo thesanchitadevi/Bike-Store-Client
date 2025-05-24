@@ -285,11 +285,6 @@ const ProductsPage = () => {
         <div className="text-center">
           <h1 className="text-4xl font-bold mb-4 animate-fade-in uppercase">
             Products
-            {filters.category && (
-              <span className="text-lg font-normal text-gray-600 block mt-2">
-                Category: {filters.category}
-              </span>
-            )}
           </h1>
         </div>
 

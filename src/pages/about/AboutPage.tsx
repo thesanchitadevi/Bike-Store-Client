@@ -8,7 +8,7 @@ interface CardProps {
 
 const Card = ({ title, description }: CardProps) => {
   return (
-    <div className="shadow-md rounded-lg p-6">
+    <div className="shadow-md rounded-lg p-6 bg-white hover:shadow-lg transition-shadow duration-300">
       <div className="text-center">
         <h3 className="text-xl font-semibold text-gray-800 mb-2">{title}</h3>
         <p className="text-gray-600">{description}</p>

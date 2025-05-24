@@ -3,6 +3,27 @@
 @theme {
   --font-Roboto: Roboto, sans-serif;
   --font-Montserrat: Montserrat, sans-serif;
+
+  /* Custom Colors */
+  --color-dark-50: #f9fafb;
+  --color-dark-100: #f3f4f6;
+  --color-dark-200: #e5e7eb;
+  --color-dark-300: #d1d5db;
+  --color-dark-400: #9ca3af;
+  --color-dark-500: #6b7280;
+  --color-dark-600: #4b5563;
+  --color-dark-700: #374151;
+  --color-dark-800: #1f2937;
+  --color-dark-900: #111827;
+
+  /* Extend existing color palette */
+  --color-primary-50: #eff6ff;
+  --color-primary-500: #3b82f6;
+  --color-primary-900: #1e3a8a;
+
+  /* Custom transitions */
+  --transition-colors: color, background-color, border-color,
+    text-decoration-color, fill, stroke;
 }
 /* Base Color:(#1A73E8)
 
@@ -172,3 +193,28 @@ Neutral Color:  (#F5F5F5) */
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
+
+/* Dark mode variants */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Override colors for dark mode */
+    --color-background: var(--color-dark-900);
+    --color-foreground: var(--color-dark-50);
+  }
+}
+
+/* Class-based dark mode */
+.dark {
+  --color-background: var(--color-dark-900);
+  --color-foreground: var(--color-dark-50);
+}
+
+/* Base styles */
+/* @layer base {
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    transition-property: var(--transition-colors);
+    transition-duration: 200ms;
+  }
+} */

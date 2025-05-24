@@ -1,7 +1,7 @@
 const ContactPage = () => {
   return (
     <div>
-      <div className="grid md:grid-cols-3 items-start gap-4 max-md:gap-12 max-w-6xl mx-auto py-6 bg-white font-[sans-serif]">
+      <div className="grid md:grid-cols-3 items-start gap-4 max-md:gap-12 max-w-6xl mx-auto py-6">
         <div className="px-4">
           <h2 className="text-gray-800 text-xl font-semibold">
             Contact Information

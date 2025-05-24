@@ -156,7 +156,7 @@ const DashboardLayout = () => {
                 onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}
                 className="flex items-center space-x-2 p-2 rounded-lg"
               >
-                <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                <div className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center">
                   <span className="text-white text-sm font-medium">
                     {user?.name?.charAt(0).toUpperCase() || "U"}
                   </span>
@@ -227,7 +227,7 @@ const DashboardLayout = () => {
             </h2>
             <p className="text-sm text-gray-600 mt-1">
               {user?.name}
-              <span className="block text-xs text-blue-600 capitalize font-medium">
+              <span className="block text-xs text-red-600 capitalize font-medium">
                 {user?.role} Dashboard
               </span>
             </p>
@@ -245,7 +245,7 @@ const DashboardLayout = () => {
                         onClick={() => setIsSidebarOpen(false)}
                       >
                         {item.icon && (
-                          <span className="mr-3 text-gray-500 group-hover:text-blue-600 transition-colors">
+                          <span className="mr-3 text-gray-500 group-hover:text-red-600 transition-colors">
                             {item.icon}
                           </span>
                         )}
@@ -261,7 +261,7 @@ const DashboardLayout = () => {
                         >
                           <div className="flex items-center">
                             {item.icon && (
-                              <span className="mr-3 text-gray-500 group-hover:text-blue-600 transition-colors">
+                              <span className="mr-3 text-gray-500 group-hover:text-red-600 transition-colors">
                                 {item.icon}
                               </span>
                             )}

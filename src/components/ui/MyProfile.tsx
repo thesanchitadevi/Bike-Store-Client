@@ -17,6 +17,7 @@ import {
   useChangePasswordMutation,
   useGetMeQuery,
 } from "../../redux/features/auth/authApi";
+import Loading from "./Loading";
 
 const MyProfile = () => {
   const data = useGetMeQuery([]);
@@ -69,8 +70,16 @@ const MyProfile = () => {
     }
   };
 
+  if (isLoading) {
+    return (
+      <div className="min-h-[60vh] flex items-center justify-center">
+        <Loading />
+      </div>
+    );
+  }
+
   return (
-    <div className="max-w-4xl mx-auto p-6">
+    <div className="max-w-7xl mx-auto p-6">
       <div className="bg-gray-50 rounded-lg shadow-md p-8">
         {/* Profile Header */}
         <div className="flex items-center gap-6 mb-8">

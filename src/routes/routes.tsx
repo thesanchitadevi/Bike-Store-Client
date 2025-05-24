@@ -26,6 +26,7 @@ import AdminDashboardAllProducts from "../pages/dashboard/admin/products/allProd
 import AdminDashboardProductAdd from "../pages/dashboard/admin/products/addProduct";
 import AdminDashboardOrderAdd from "../pages/dashboard/admin/orders/addOrders";
 import AdminDashboardAllOrders from "../pages/dashboard/admin/orders/allOrders";
+import FaqPage from "../pages/faq/Faq";
 
 const router = createBrowserRouter([
   {
@@ -79,6 +80,10 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         element: <ContactPage />,
+      },
+      {
+        path: "/faq",
+        element: <FaqPage />,
       },
     ],
   },

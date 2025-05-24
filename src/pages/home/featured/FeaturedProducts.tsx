@@ -8,7 +8,7 @@ const FeaturedProductsPage = () => {
   const { data: products, isLoading } = useGetAllProductsQuery(undefined);
 
   return (
-    <div className="container max-w-6xl mx-auto md:px-0 px-5 py-4">
+    <div className="container max-w-6xl mx-auto md:px-0 px-5 py-8">
       <div className="text-center">
         <h1 className="text-4xl font-bold mb-4 animate-fade-in uppercase">
           Featured Products

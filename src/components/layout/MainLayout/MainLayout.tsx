@@ -8,7 +8,7 @@ import ScrollToTop from "../../ui/ScrollToTop";
 const MainLayout = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   return (
-    <div className="app-wrapper">
+    <div className="app-wrapper bg-gray-50 ">
       <ScrollToTop />
       <Nav openCartSidebar={() => setIsCartOpen(true)} />
       <Outlet />
